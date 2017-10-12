@@ -12,19 +12,21 @@ but WITHOUT ANY WARRANTY.
 #include <iostream>
 #include "Dependencies\glew.h"
 #include "Dependencies\freeglut.h"
-
+#include "Object.h"
 #include "Renderer.h"
-
+using namespace std;
 Renderer *g_Renderer = NULL;
-
 void RenderScene(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor(0.0f, 0.3f, 0.3f, 1.0f);
 
-	// Renderer Test
-	g_Renderer->DrawSolidRect(0, 0, 0, 4, 1, 0, 1, 1);
-
+	Object obj1(0, 0, 0, 5, 0, 0, 0, 0, 20, 20, 1);
+	if (mousecheck == true) 
+	{
+		obj1.Update();
+		obj1.Draw(g_Renderer);
+	}
 	glutSwapBuffers();
 }
 
@@ -32,9 +34,18 @@ void Idle(void)
 {
 	RenderScene();
 }
-
+bool mousecheck = false;
 void MouseInput(int button, int state, int x, int y)
 {
+	if ((button == GLUT_LEFT_BUTTON && state == GLUT_DOWN))
+	{
+		mousecheck = true;
+		printf("\n%d %d", x, y);
+	}
+	else
+	{
+		mousecheck = false;
+	}
 	RenderScene();
 }
 
