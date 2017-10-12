@@ -15,14 +15,17 @@ but WITHOUT ANY WARRANTY.
 #include "Object.h"
 #include "Renderer.h"
 using namespace std;
+
+Object obj1(-50.0, -50.0, 0, 5, 0, 0, 0, 0, 0.0005, 0, 1);
 Renderer *g_Renderer = NULL;
+bool mousecheck = false;
+
 void RenderScene(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor(0.0f, 0.3f, 0.3f, 1.0f);
 
-	Object obj1(0, 0, 0, 5, 0, 0, 0, 0, 20, 20, 1);
-	if (mousecheck == true) 
+	if (mousecheck == true)
 	{
 		obj1.Update();
 		obj1.Draw(g_Renderer);
@@ -34,13 +37,11 @@ void Idle(void)
 {
 	RenderScene();
 }
-bool mousecheck = false;
 void MouseInput(int button, int state, int x, int y)
 {
 	if ((button == GLUT_LEFT_BUTTON && state == GLUT_DOWN))
 	{
 		mousecheck = true;
-		printf("\n%d %d", x, y);
 	}
 	else
 	{

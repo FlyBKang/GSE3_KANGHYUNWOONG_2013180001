@@ -125,47 +125,31 @@ void Object::Draw(Renderer * g_Renderer)
 }
 
 
-//	float Object::GetX()
-//	{
-//		return Object_x;
-//	}
-//	float Object::GetY()
-//	{
-//		return Object_y;
-//	}
-//	float Object::GetZ()
-//	{
-//		return Object_z;
-//	}
-//	
-//	float Object::GetSize()
-//	{
-//		return Object_size;
-//	}
-//	float Object::GetR()
-//	{
-//		return Object_r;
-//	}
-//	float Object::GetG()
-//	{
-//		return Object_g;
-//	}
-//	float Object::GetB()
-//	{
-//		return Object_b;
-//	}
-//	float Object::GetA()
-//	{
-//		return Object_a;
-//	}
-//	float Object::GetMod()
-//	{
-//		return Object_mod;
-//	}
+float Object::GetX(){return Object_x;}
+float Object::GetY(){return Object_y;}
+float Object::GetZ(){return Object_z;}
+float Object::GetSize(){return Object_size;}
+float Object::GetR(){return Object_r;}
+float Object::GetG(){return Object_g;}
+float Object::GetB(){return Object_b;}
+float Object::GetA(){return Object_a;}
+float Object::GetVx() { return Object_vx; }
+float Object::GetVy() { return Object_vy; }
+float Object::GetMod(){return Object_mod;}
+void Object::SetX(float f) { Object_x = f; }
+void Object::SetY(float f) { Object_y = f; }
+void Object::SetZ(float f) { Object_z = f; }
+void Object::SetSize(float f) { Object_size = f; }
+void Object::SetR(float f) { Object_r = f; }
+void Object::SetG(float f) { Object_g = f; }
+void Object::SetB(float f) { Object_b = f; }
+void Object::SetA(float f) { Object_a = f; }
+void Object::SetMod(int n) { Object_mod = n; }
+
 void Object::Update()
 {
-	Object_x +=	Object_vx;
-	Object_y += Object_vy;
+	SetX(GetX() + GetVx());
+	SetY(GetY() + GetVy());
 }
 
 Object::~Object()
