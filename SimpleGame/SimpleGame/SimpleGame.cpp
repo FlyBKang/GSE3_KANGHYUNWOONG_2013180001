@@ -14,9 +14,11 @@ but WITHOUT ANY WARRANTY.
 #include "Dependencies\freeglut.h"
 #include "Object.h"
 #include "Renderer.h"
+#include "SceneMgr.h"
 using namespace std;
 
-Object obj1(-50.0, -50.0, 0, 5, 0, 0, 0, 0, 0.0005, 0, 1);
+//int cnt = 50;
+SceneMgr scene;
 Renderer *g_Renderer = NULL;
 bool mousecheck = false;
 
@@ -27,9 +29,10 @@ void RenderScene(void)
 
 	if (mousecheck == true)
 	{
-		obj1.Update();
-		obj1.Draw(g_Renderer);
+		scene.Rendering(g_Renderer,MAX);
+		scene.Checking();
 	}
+
 	glutSwapBuffers();
 }
 
@@ -41,11 +44,11 @@ void MouseInput(int button, int state, int x, int y)
 {
 	if ((button == GLUT_LEFT_BUTTON && state == GLUT_DOWN))
 	{
+		for (int i = 0; i<MAX; ++i)
+			scene.SceneSet(i, rand() % 500 - 250, rand() % 500 - 250, 0, 5, 0, 0, 0, 0, (rand() % 2 - 0.5) / 10, (rand() % 2 - 0.5) / 10, 1);
 		mousecheck = true;
-	}
-	else
-	{
-		mousecheck = false;
+		//scene.SceneSet(cnt,x-250,-(y-250),0,5,0,0,0,0,0.005,0,1);
+		//cnt++;
 	}
 	RenderScene();
 }

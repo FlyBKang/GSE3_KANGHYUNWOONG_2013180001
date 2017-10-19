@@ -123,7 +123,20 @@ void Object::Draw(Renderer * g_Renderer)
 
 	}
 }
-
+void Object::Set(float x, float y, float z, float size, float r, float g, float b, float a, float vx, float vy, int  mod)
+{
+	Object_x = x;
+	Object_y = y;
+	Object_z = z;
+	Object_size = size;
+	Object_r = r;
+	Object_g = g;
+	Object_b = b;
+	Object_a = a;
+	Object_vx = vx;
+	Object_vy = vy;
+	Object_mod = mod;
+}
 
 float Object::GetX(){return Object_x;}
 float Object::GetY(){return Object_y;}
@@ -144,14 +157,23 @@ void Object::SetR(float f) { Object_r = f; }
 void Object::SetG(float f) { Object_g = f; }
 void Object::SetB(float f) { Object_b = f; }
 void Object::SetA(float f) { Object_a = f; }
+void Object::SetVx(float f) { Object_vx = f; }
+void Object::SetVy(float f) { Object_vy = f; }
 void Object::SetMod(int n) { Object_mod = n; }
 
 void Object::Update()
 {
+	if (GetX() > 250)
+		SetVx(-GetVx()); 
+	if (GetY() > 250)
+		SetVy(-GetVy()); 
+	if (GetX() < -250)
+		SetVx(-GetVx());
+	if (GetY() < -250)
+		SetVy(-GetVy());
 	SetX(GetX() + GetVx());
 	SetY(GetY() + GetVy());
 }
 
-Object::~Object()
-{
-}
+Object::Object() {}
+Object::~Object() {}

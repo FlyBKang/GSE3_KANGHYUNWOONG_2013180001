@@ -15,6 +15,7 @@ class Object
 	int  Object_mod;				// ป๓ลย
 
 public:
+	Object();
 	Object(float x, float y, float z, float size, float r, float g, float b, float a,float vx, float vy, int  mod);
 	~Object();
 	float GetX();
@@ -28,6 +29,8 @@ public:
 	float GetMod();
 	float GetVx();
 	float GetVy();
+
+	void Set(float x, float y, float z, float size, float r, float g, float b, float a, float vx, float vy, int  mod);
 	void SetX(float f);
 	void SetY(float f);
 	void SetZ(float f);
@@ -37,6 +40,8 @@ public:
 	void SetB(float f);
 	void SetA(float f);
 	void SetMod(int n);
+	void SetVx(float f);
+	void SetVy(float f);
 	void Update();
 	void Draw(Renderer *g_Renderer);
 };
