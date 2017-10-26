@@ -18,7 +18,7 @@ but WITHOUT ANY WARRANTY.
 using namespace std;
 
 SceneMgr scene;
-Renderer *g_Renderer = NULL;
+int cnt = 0;
 bool mousecheck = false;
 
 void RenderScene(void)
@@ -28,7 +28,7 @@ void RenderScene(void)
 
 	if (mousecheck == true)
 	{
-		scene.Rendering(g_Renderer,MAX);
+		scene.Rendering(MAX);
 		scene.Checking();
 		scene.Moding();
 	}
@@ -38,29 +38,29 @@ void RenderScene(void)
 
 void Idle(void)
 {
-	RenderScene();
 }
 void MouseInput(int button, int state, int x, int y)
 {
 	if ((button == GLUT_LEFT_BUTTON && state == GLUT_DOWN))
 	{
-		for (int i = 0; i<MAX; ++i)
-			scene.SceneSet(i, rand() % 500 - 250, rand() % 500 - 250, 0, 5, 0, 0, 0, 0, (rand() % 4 - 1.5) / 5, (rand() % 4 - 1.5) / 5, 1);
+		scene.SceneSet(cnt, rand() % 500 - 250, rand() % 500 - 250, 0, 5, 0, 0, 0, 0, (rand() % 11 - 5), (rand() % 11 - 5)  , 1);
+		cnt++;
 		mousecheck = true;
 	}
-	RenderScene();
 }
 
 void KeyInput(unsigned char key, int x, int y)
 {
-	RenderScene();
 }
 
 void SpecialKeyInput(int key, int x, int y)
 {
+}
+void timeGetTime(int value)
+{
+	glutTimerFunc(TIME, timeGetTime, 1);
 	RenderScene();
 }
-
 int main(int argc, char **argv)
 {
 	// Initialize GL things
@@ -71,6 +71,7 @@ int main(int argc, char **argv)
 	glutCreateWindow("Game Software Engineering KPU");
 
 	glewInit();
+	scene.Rising();
 	if (glewIsSupported("GL_VERSION_3_0"))
 	{
 		std::cout << " GLEW Version is 3.0\n ";
@@ -80,22 +81,13 @@ int main(int argc, char **argv)
 		std::cout << "GLEW 3.0 not supported\n ";
 	}
 
-	// Initialize Renderer
-	g_Renderer = new Renderer(500, 500);
-	if (!g_Renderer->IsInitialized())
-	{
-		std::cout << "Renderer could not be initialized.. \n";
-	}
-
 	glutDisplayFunc(RenderScene);
 	glutIdleFunc(Idle);
 	glutKeyboardFunc(KeyInput);
 	glutMouseFunc(MouseInput);
 	glutSpecialFunc(SpecialKeyInput);
-
+	glutTimerFunc(TIME, timeGetTime, 1);
 	glutMainLoop();
-
-	delete g_Renderer;
 
     return 0;
 }

@@ -15,116 +15,121 @@ Object::Object(float x, float y, float z, float size, float r, float g, float b,
 	Object_vx = vx;
 	Object_vy = vy;
 	Object_mod = mod;
+	Object_Life = 10;
+	Object_LifeTime = 10000;
 }
 void Object::Draw(Renderer * g_Renderer)
 {
-	if (Object_mod == 0) //Box
+	if (Object_Life > 0 && Object_LifeTime > 0)
 	{
-		g_Renderer->DrawSolidRect(Object_x , Object_y , Object_z, Object_size, Object_r, Object_g, Object_b, Object_a);
-	}
-	if (Object_mod == 1) //Fire
-	{
-		g_Renderer->DrawSolidRect(Object_x - Object_size, Object_y - Object_size, Object_z, Object_size, 1, 0, 0, 0);
-		g_Renderer->DrawSolidRect(Object_x, Object_y - Object_size, Object_z, Object_size, 1, 1, 0, 0);
-		g_Renderer->DrawSolidRect(Object_x + Object_size, Object_y - Object_size, Object_z, Object_size, 1, 0, 0, 0);
-		g_Renderer->DrawSolidRect(Object_x - Object_size, Object_y, Object_z, Object_size, 1, 0, 0, 0);
-		g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size, 1, 0, 0, 0);
-		g_Renderer->DrawSolidRect(Object_x + Object_size, Object_y, Object_z, Object_size, 1, 0, 0, 0);
-		g_Renderer->DrawSolidRect(Object_x, Object_y + Object_size, Object_z, Object_size, 1, 0, 0, 0);
-	}
-	if (Object_mod == 2) //Skull
-	{
-		g_Renderer->DrawSolidRect(Object_x - Object_size, Object_y + Object_size, Object_z, Object_size, 1, 1, 1, 0);
-		g_Renderer->DrawSolidRect(Object_x - Object_size * 2, Object_y + Object_size, Object_z, Object_size, 1, 1, 1, 0);
-		g_Renderer->DrawSolidRect(Object_x, Object_y + Object_size, Object_z, Object_size, 1, 1, 1, 0);
-		g_Renderer->DrawSolidRect(Object_x + Object_size, Object_y + Object_size, Object_z, Object_size, 1, 1, 1, 0);
-		g_Renderer->DrawSolidRect(Object_x + Object_size * 2, Object_y + Object_size, Object_z, Object_size, 1, 1, 1, 0);
+		if (Object_mod == 0) //Box
+		{
+			g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size, Object_r, Object_g, Object_b, Object_a);
+		}
+		if (Object_mod == 1) //Fire
+		{
+			g_Renderer->DrawSolidRect(Object_x - Object_size, Object_y - Object_size, Object_z, Object_size, 1, 0, 0, 0);
+			g_Renderer->DrawSolidRect(Object_x, Object_y - Object_size, Object_z, Object_size, 1, 1, 0, 0);
+			g_Renderer->DrawSolidRect(Object_x + Object_size, Object_y - Object_size, Object_z, Object_size, 1, 0, 0, 0);
+			g_Renderer->DrawSolidRect(Object_x - Object_size, Object_y, Object_z, Object_size, 1, 0, 0, 0);
+			g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size, 1, 0, 0, 0);
+			g_Renderer->DrawSolidRect(Object_x + Object_size, Object_y, Object_z, Object_size, 1, 0, 0, 0);
+			g_Renderer->DrawSolidRect(Object_x, Object_y + Object_size, Object_z, Object_size, 1, 0, 0, 0);
+		}
+		if (Object_mod == 2) //Skull
+		{
+			g_Renderer->DrawSolidRect(Object_x - Object_size, Object_y + Object_size, Object_z, Object_size, 1, 1, 1, 0);
+			g_Renderer->DrawSolidRect(Object_x - Object_size * 2, Object_y + Object_size, Object_z, Object_size, 1, 1, 1, 0);
+			g_Renderer->DrawSolidRect(Object_x, Object_y + Object_size, Object_z, Object_size, 1, 1, 1, 0);
+			g_Renderer->DrawSolidRect(Object_x + Object_size, Object_y + Object_size, Object_z, Object_size, 1, 1, 1, 0);
+			g_Renderer->DrawSolidRect(Object_x + Object_size * 2, Object_y + Object_size, Object_z, Object_size, 1, 1, 1, 0);
 
-		g_Renderer->DrawSolidRect(Object_x - Object_size * 2, Object_y, Object_z, Object_size, 1, 1, 1, 0);
-		g_Renderer->DrawSolidRect(Object_x - Object_size, Object_y, Object_z, Object_size, 0, 0, 0, 0);
-		g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size, 1, 1, 1, 0);
-		g_Renderer->DrawSolidRect(Object_x + Object_size, Object_y, Object_z, Object_size, 0, 0, 0, 0);
-		g_Renderer->DrawSolidRect(Object_x + Object_size * 2, Object_y, Object_z, Object_size, 1, 1, 1, 0);
+			g_Renderer->DrawSolidRect(Object_x - Object_size * 2, Object_y, Object_z, Object_size, 1, 1, 1, 0);
+			g_Renderer->DrawSolidRect(Object_x - Object_size, Object_y, Object_z, Object_size, 0, 0, 0, 0);
+			g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size, 1, 1, 1, 0);
+			g_Renderer->DrawSolidRect(Object_x + Object_size, Object_y, Object_z, Object_size, 0, 0, 0, 0);
+			g_Renderer->DrawSolidRect(Object_x + Object_size * 2, Object_y, Object_z, Object_size, 1, 1, 1, 0);
 
-		g_Renderer->DrawSolidRect(Object_x - Object_size, Object_y - Object_size, Object_z, Object_size, 1, 1, 1, 0);
-		g_Renderer->DrawSolidRect(Object_x - Object_size * 2, Object_y - Object_size, Object_z, Object_size, 1, 1, 1, 0);
-		g_Renderer->DrawSolidRect(Object_x, Object_y - Object_size, Object_z, Object_size, 1, 1, 1, 0);
-		g_Renderer->DrawSolidRect(Object_x + Object_size, Object_y - Object_size, Object_z, Object_size, 1, 1, 1, 0);
-		g_Renderer->DrawSolidRect(Object_x + Object_size * 2, Object_y - Object_size, Object_z, Object_size, 1, 1, 1, 0);
+			g_Renderer->DrawSolidRect(Object_x - Object_size, Object_y - Object_size, Object_z, Object_size, 1, 1, 1, 0);
+			g_Renderer->DrawSolidRect(Object_x - Object_size * 2, Object_y - Object_size, Object_z, Object_size, 1, 1, 1, 0);
+			g_Renderer->DrawSolidRect(Object_x, Object_y - Object_size, Object_z, Object_size, 1, 1, 1, 0);
+			g_Renderer->DrawSolidRect(Object_x + Object_size, Object_y - Object_size, Object_z, Object_size, 1, 1, 1, 0);
+			g_Renderer->DrawSolidRect(Object_x + Object_size * 2, Object_y - Object_size, Object_z, Object_size, 1, 1, 1, 0);
 
-		g_Renderer->DrawSolidRect(Object_x - Object_size, Object_y - Object_size * 2, Object_z, Object_size, 1, 1, 1, 0);
-		g_Renderer->DrawSolidRect(Object_x + Object_size, Object_y - Object_size * 2, Object_z, Object_size, 1, 1, 1, 0);
-	}
-	if (Object_mod == 3)//checked pattern
-	{
-		g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size * 3, COLOR * 103, COLOR * 73, COLOR * 41, 0);
-		g_Renderer->DrawSolidRect(Object_x + Object_size, Object_y, Object_z, Object_size, COLOR * 202, COLOR * 172, COLOR * 126, 0);
-		g_Renderer->DrawSolidRect(Object_x - Object_size, Object_y, Object_z, Object_size, COLOR * 202, COLOR * 172, COLOR * 126, 0);
-		g_Renderer->DrawSolidRect(Object_x, Object_y + Object_size, Object_z, Object_size, COLOR * 202, COLOR * 172, COLOR * 126, 0);
-		g_Renderer->DrawSolidRect(Object_x, Object_y - Object_size, Object_z, Object_size, COLOR * 202, COLOR * 172, COLOR * 126, 0);
-	}
-	if (Object_mod == 4)//castle wall
-	{
-		g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size * 5, COLOR * 76, COLOR * 74, COLOR * 71, 0);
+			g_Renderer->DrawSolidRect(Object_x - Object_size, Object_y - Object_size * 2, Object_z, Object_size, 1, 1, 1, 0);
+			g_Renderer->DrawSolidRect(Object_x + Object_size, Object_y - Object_size * 2, Object_z, Object_size, 1, 1, 1, 0);
+		}
+		if (Object_mod == 3)//checked pattern
+		{
+			g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size * 3, COLOR * 103, COLOR * 73, COLOR * 41, 0);
+			g_Renderer->DrawSolidRect(Object_x + Object_size, Object_y, Object_z, Object_size, COLOR * 202, COLOR * 172, COLOR * 126, 0);
+			g_Renderer->DrawSolidRect(Object_x - Object_size, Object_y, Object_z, Object_size, COLOR * 202, COLOR * 172, COLOR * 126, 0);
+			g_Renderer->DrawSolidRect(Object_x, Object_y + Object_size, Object_z, Object_size, COLOR * 202, COLOR * 172, COLOR * 126, 0);
+			g_Renderer->DrawSolidRect(Object_x, Object_y - Object_size, Object_z, Object_size, COLOR * 202, COLOR * 172, COLOR * 126, 0);
+		}
+		if (Object_mod == 4)//castle wall
+		{
+			g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size * 5, COLOR * 76, COLOR * 74, COLOR * 71, 0);
 
-		g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
-		g_Renderer->DrawSolidRect(Object_x + Object_size * 2, Object_y, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
-		g_Renderer->DrawSolidRect(Object_x - Object_size * 2, Object_y, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
+			g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
+			g_Renderer->DrawSolidRect(Object_x + Object_size * 2, Object_y, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
+			g_Renderer->DrawSolidRect(Object_x - Object_size * 2, Object_y, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
 
-		g_Renderer->DrawSolidRect(Object_x, Object_y + Object_size * 2, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
-		g_Renderer->DrawSolidRect(Object_x + Object_size * 2, Object_y + Object_size * 2, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
-		g_Renderer->DrawSolidRect(Object_x - Object_size * 2, Object_y + Object_size * 2, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
-		g_Renderer->DrawSolidRect(Object_x + Object_size, Object_y + Object_size * 2, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
-		g_Renderer->DrawSolidRect(Object_x - Object_size, Object_y + Object_size * 2, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
+			g_Renderer->DrawSolidRect(Object_x, Object_y + Object_size * 2, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
+			g_Renderer->DrawSolidRect(Object_x + Object_size * 2, Object_y + Object_size * 2, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
+			g_Renderer->DrawSolidRect(Object_x - Object_size * 2, Object_y + Object_size * 2, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
+			g_Renderer->DrawSolidRect(Object_x + Object_size, Object_y + Object_size * 2, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
+			g_Renderer->DrawSolidRect(Object_x - Object_size, Object_y + Object_size * 2, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
 
-		g_Renderer->DrawSolidRect(Object_x, Object_y - Object_size * 2, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
-		g_Renderer->DrawSolidRect(Object_x + Object_size * 2, Object_y - Object_size * 2, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
-		g_Renderer->DrawSolidRect(Object_x - Object_size * 2, Object_y - Object_size * 2, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
+			g_Renderer->DrawSolidRect(Object_x, Object_y - Object_size * 2, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
+			g_Renderer->DrawSolidRect(Object_x + Object_size * 2, Object_y - Object_size * 2, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
+			g_Renderer->DrawSolidRect(Object_x - Object_size * 2, Object_y - Object_size * 2, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
 
-		g_Renderer->DrawSolidRect(Object_x, Object_y + Object_size * 3, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
-		g_Renderer->DrawSolidRect(Object_x + Object_size * 2, Object_y + Object_size * 3, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
-		g_Renderer->DrawSolidRect(Object_x - Object_size * 2, Object_y + Object_size * 3, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
+			g_Renderer->DrawSolidRect(Object_x, Object_y + Object_size * 3, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
+			g_Renderer->DrawSolidRect(Object_x + Object_size * 2, Object_y + Object_size * 3, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
+			g_Renderer->DrawSolidRect(Object_x - Object_size * 2, Object_y + Object_size * 3, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
 
-		g_Renderer->DrawSolidRect(Object_x + Object_size, Object_y + Object_size, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
-		g_Renderer->DrawSolidRect(Object_x - Object_size, Object_y + Object_size, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
+			g_Renderer->DrawSolidRect(Object_x + Object_size, Object_y + Object_size, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
+			g_Renderer->DrawSolidRect(Object_x - Object_size, Object_y + Object_size, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
 
-		g_Renderer->DrawSolidRect(Object_x + Object_size, Object_y - Object_size, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
-		g_Renderer->DrawSolidRect(Object_x - Object_size, Object_y - Object_size, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
-	}
-	if (Object_mod == 5)//castle 
-	{
-		g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size * 5, COLOR * 76, COLOR * 74, COLOR * 71, 0);
+			g_Renderer->DrawSolidRect(Object_x + Object_size, Object_y - Object_size, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
+			g_Renderer->DrawSolidRect(Object_x - Object_size, Object_y - Object_size, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
+		}
+		if (Object_mod == 5)//castle 
+		{
+			g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size * 5, COLOR * 76, COLOR * 74, COLOR * 71, 0);
 
-		g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
-		g_Renderer->DrawSolidRect(Object_x + Object_size * 2, Object_y, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
-		g_Renderer->DrawSolidRect(Object_x - Object_size * 2, Object_y, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
+			g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
+			g_Renderer->DrawSolidRect(Object_x + Object_size * 2, Object_y, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
+			g_Renderer->DrawSolidRect(Object_x - Object_size * 2, Object_y, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
 
-		g_Renderer->DrawSolidRect(Object_x, Object_y + Object_size * 5, Object_z, Object_size * 3, COLOR * 43, COLOR * 41, COLOR * 41, 0);
-		g_Renderer->DrawSolidRect(Object_x, Object_y + Object_size * 4, Object_z, Object_size * 3, COLOR * 76, COLOR * 74, COLOR * 71, 0);
-		g_Renderer->DrawSolidRect(Object_x, Object_y + Object_size * 7, Object_z, Object_size, COLOR * 76, COLOR * 74, COLOR * 71, 0);
+			g_Renderer->DrawSolidRect(Object_x, Object_y + Object_size * 5, Object_z, Object_size * 3, COLOR * 43, COLOR * 41, COLOR * 41, 0);
+			g_Renderer->DrawSolidRect(Object_x, Object_y + Object_size * 4, Object_z, Object_size * 3, COLOR * 76, COLOR * 74, COLOR * 71, 0);
+			g_Renderer->DrawSolidRect(Object_x, Object_y + Object_size * 7, Object_z, Object_size, COLOR * 76, COLOR * 74, COLOR * 71, 0);
 
-		g_Renderer->DrawSolidRect(Object_x, Object_y + Object_size * 2, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
-		g_Renderer->DrawSolidRect(Object_x + Object_size * 2, Object_y + Object_size * 2, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
-		g_Renderer->DrawSolidRect(Object_x - Object_size * 2, Object_y + Object_size * 2, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
-		g_Renderer->DrawSolidRect(Object_x + Object_size, Object_y + Object_size * 2, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
-		g_Renderer->DrawSolidRect(Object_x - Object_size, Object_y + Object_size * 2, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
+			g_Renderer->DrawSolidRect(Object_x, Object_y + Object_size * 2, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
+			g_Renderer->DrawSolidRect(Object_x + Object_size * 2, Object_y + Object_size * 2, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
+			g_Renderer->DrawSolidRect(Object_x - Object_size * 2, Object_y + Object_size * 2, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
+			g_Renderer->DrawSolidRect(Object_x + Object_size, Object_y + Object_size * 2, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
+			g_Renderer->DrawSolidRect(Object_x - Object_size, Object_y + Object_size * 2, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
 
-		g_Renderer->DrawSolidRect(Object_x, Object_y - Object_size * 2, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
-		g_Renderer->DrawSolidRect(Object_x + Object_size * 2, Object_y - Object_size * 2, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
-		g_Renderer->DrawSolidRect(Object_x - Object_size * 2, Object_y - Object_size * 2, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
+			g_Renderer->DrawSolidRect(Object_x, Object_y - Object_size * 2, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
+			g_Renderer->DrawSolidRect(Object_x + Object_size * 2, Object_y - Object_size * 2, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
+			g_Renderer->DrawSolidRect(Object_x - Object_size * 2, Object_y - Object_size * 2, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
 
-		g_Renderer->DrawSolidRect(Object_x, Object_y + Object_size * 3, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
-		g_Renderer->DrawSolidRect(Object_x + Object_size * 2, Object_y + Object_size * 3, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
-		g_Renderer->DrawSolidRect(Object_x - Object_size * 2, Object_y + Object_size * 3, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
+			g_Renderer->DrawSolidRect(Object_x, Object_y + Object_size * 3, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
+			g_Renderer->DrawSolidRect(Object_x + Object_size * 2, Object_y + Object_size * 3, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
+			g_Renderer->DrawSolidRect(Object_x - Object_size * 2, Object_y + Object_size * 3, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
 
-		g_Renderer->DrawSolidRect(Object_x + Object_size, Object_y + Object_size, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
-		g_Renderer->DrawSolidRect(Object_x - Object_size, Object_y + Object_size, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
+			g_Renderer->DrawSolidRect(Object_x + Object_size, Object_y + Object_size, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
+			g_Renderer->DrawSolidRect(Object_x - Object_size, Object_y + Object_size, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
 
-		g_Renderer->DrawSolidRect(Object_x + Object_size, Object_y - Object_size, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
-		g_Renderer->DrawSolidRect(Object_x - Object_size, Object_y - Object_size, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
+			g_Renderer->DrawSolidRect(Object_x + Object_size, Object_y - Object_size, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
+			g_Renderer->DrawSolidRect(Object_x - Object_size, Object_y - Object_size, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 0);
 
-		g_Renderer->DrawSolidRect(Object_x, Object_y - Object_size, Object_z, Object_size * 3, COLOR * 177, COLOR * 120, COLOR * 78, 0);
+			g_Renderer->DrawSolidRect(Object_x, Object_y - Object_size, Object_z, Object_size * 3, COLOR * 177, COLOR * 120, COLOR * 78, 0);
 
+		}
 	}
 }
 void Object::Set(float x, float y, float z, float size, float r, float g, float b, float a, float vx, float vy, int  mod)
@@ -140,19 +145,23 @@ void Object::Set(float x, float y, float z, float size, float r, float g, float 
 	Object_vx = vx;
 	Object_vy = vy;
 	Object_mod = mod;
+	Object_Life = 10;
+	Object_LifeTime = 10000;
 }
 
-float Object::GetX(){return Object_x;}
-float Object::GetY(){return Object_y;}
-float Object::GetZ(){return Object_z;}
-float Object::GetSize(){return Object_size;}
-float Object::GetR(){return Object_r;}
-float Object::GetG(){return Object_g;}
-float Object::GetB(){return Object_b;}
-float Object::GetA(){return Object_a;}
+float Object::GetX(){ return Object_x; }
+float Object::GetY(){ return Object_y; }
+float Object::GetZ(){ return Object_z; }
+float Object::GetSize(){ return Object_size; }
+float Object::GetR(){ return Object_r; }
+float Object::GetG(){ return Object_g; }
+float Object::GetB(){ return Object_b; }
+float Object::GetA(){ return Object_a; }
 float Object::GetVx() { return Object_vx; }
 float Object::GetVy() { return Object_vy; }
-float Object::GetMod(){return Object_mod;}
+float Object::GetTime() { return Object_LifeTime; }
+float Object::GetLife() { return Object_Life; }
+float Object::GetMod(){ return Object_mod;}
 void Object::SetX(float f) { Object_x = f; }
 void Object::SetY(float f) { Object_y = f; }
 void Object::SetZ(float f) { Object_z = f; }
@@ -163,9 +172,11 @@ void Object::SetB(float f) { Object_b = f; }
 void Object::SetA(float f) { Object_a = f; }
 void Object::SetVx(float f) { Object_vx = f; }
 void Object::SetVy(float f) { Object_vy = f; }
+void Object::SetLife(float f) { Object_Life = f; }
+void Object::SetTime(float f) { Object_LifeTime = f; }
 void Object::SetMod(int n) { Object_mod = n; }
 
-void Object::Update()
+void Object::Update(float Time)
 {
 	if (GetX() > 250)
 		SetVx(-GetVx()); 
@@ -177,6 +188,7 @@ void Object::Update()
 		SetVy(-GetVy());
 	SetX(GetX() + GetVx());
 	SetY(GetY() + GetVy());
+	Object_LifeTime -= Time;
 }
 
 Object::Object() {}

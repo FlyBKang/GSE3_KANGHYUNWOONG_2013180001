@@ -13,6 +13,8 @@ class Object
 	float Object_vx;				// 속도x
 	float Object_vy;				// 속도y
 	int  Object_mod;				// 상태
+	float Object_Life;
+	float Object_LifeTime;
 
 public:
 	Object();
@@ -29,6 +31,8 @@ public:
 	float GetMod();
 	float GetVx();
 	float GetVy();
+	float GetLife();
+	float GetTime();
 
 	void Set(float x, float y, float z, float size, float r, float g, float b, float a, float vx, float vy, int  mod);
 	void SetX(float f);
@@ -42,6 +46,8 @@ public:
 	void SetMod(int n);
 	void SetVx(float f);
 	void SetVy(float f);
-	void Update();
+	void SetLife(float f);
+	void SetTime(float f);
+	void Update(float Time);
 	void Draw(Renderer *g_Renderer);
 };

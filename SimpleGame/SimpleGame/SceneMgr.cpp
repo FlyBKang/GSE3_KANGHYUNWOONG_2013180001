@@ -51,14 +51,17 @@ void SceneMgr::Moding()
 			else
 				obj[i].SetMod(1);
 			check[i] = 0;
+			obj[i].SetLife(obj[i].GetLife() - 1);
 		}
 }
-void SceneMgr::Rendering(Renderer *g_Renderer, int n) {
+
+void SceneMgr::Rendering(int n)
+{
 	if (n >= MAX)
 		n = MAX;
 	for (int i = 0;i<n;++i)
 	{
-		obj[i].Update();
+		obj[i].Update(10.0);
 		obj[i].Draw(g_Renderer);
 	}
 }
@@ -67,4 +70,8 @@ void SceneMgr::SceneSet(int n, float x, float y, float z, float size, float r, f
 	if (n >= MAX)
 		n = n%MAX;
 	obj[n].Set(x,y,z,size,r,g,b,a,vx,vy,mod); 
+}
+void SceneMgr::Rising()
+{
+	g_Renderer = new Renderer(500, 500);
 }
