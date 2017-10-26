@@ -18,10 +18,7 @@ void SceneMgr::Checking() {
 					(obj[i].GetX() + BREAK > obj[j].GetX()) && (obj[i].GetX() - BREAK < obj[j].GetX())
 					)
 				{
-					if (obj[i].GetMod() == 1)
-						obj[i].SetMod(2);
-					else
-						obj[i].SetMod(1);
+					check[i] = 1;
 				}
 			}
 			else if(
@@ -32,16 +29,30 @@ void SceneMgr::Checking() {
 					(obj[i].GetY() + BREAK > obj[j].GetY()) && (obj[i].GetY() - BREAK < obj[j].GetY())
 					)
 				{
-					if (obj[i].GetMod() == 1)
-						obj[i].SetMod(2);
-					else
-						obj[i].SetMod(1);
+					check[i] = 1;
 				}
 			}
 		}
 	}
 }
-
+void SceneMgr::Moding()
+{
+	for (int i = 0; i < MAX; ++i)
+		if (check[i]) 
+		{
+			if (obj[i].GetMod() == 1)
+				obj[i].SetMod(2);
+			//else if (obj[i].GetMod() == 2)
+			//	obj[i].SetMod(3);
+			//else if (obj[i].GetMod() == 3)
+			//	obj[i].SetMod(4);
+			//else if (obj[i].GetMod() == 4)
+			//	obj[i].SetMod(5);
+			else
+				obj[i].SetMod(1);
+			check[i] = 0;
+		}
+}
 void SceneMgr::Rendering(Renderer *g_Renderer, int n) {
 	if (n >= MAX)
 		n = MAX;
@@ -55,4 +66,5 @@ void SceneMgr::SceneSet(int n, float x, float y, float z, float size, float r, f
 {
 	if (n >= MAX)
 		n = n%MAX;
-	obj[n].Set(x,y,z,size,r,g,b,a,vx,vy,mod); }
+	obj[n].Set(x,y,z,size,r,g,b,a,vx,vy,mod); 
+}

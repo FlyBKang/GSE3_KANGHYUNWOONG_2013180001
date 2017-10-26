@@ -18,6 +18,10 @@ Object::Object(float x, float y, float z, float size, float r, float g, float b,
 }
 void Object::Draw(Renderer * g_Renderer)
 {
+	if (Object_mod == 0) //Box
+	{
+		g_Renderer->DrawSolidRect(Object_x , Object_y , Object_z, Object_size, Object_r, Object_g, Object_b, Object_a);
+	}
 	if (Object_mod == 1) //Fire
 	{
 		g_Renderer->DrawSolidRect(Object_x - Object_size, Object_y - Object_size, Object_z, Object_size, 1, 0, 0, 0);

@@ -17,7 +17,6 @@ but WITHOUT ANY WARRANTY.
 #include "SceneMgr.h"
 using namespace std;
 
-//int cnt = 50;
 SceneMgr scene;
 Renderer *g_Renderer = NULL;
 bool mousecheck = false;
@@ -31,6 +30,7 @@ void RenderScene(void)
 	{
 		scene.Rendering(g_Renderer,MAX);
 		scene.Checking();
+		scene.Moding();
 	}
 
 	glutSwapBuffers();
@@ -45,10 +45,8 @@ void MouseInput(int button, int state, int x, int y)
 	if ((button == GLUT_LEFT_BUTTON && state == GLUT_DOWN))
 	{
 		for (int i = 0; i<MAX; ++i)
-			scene.SceneSet(i, rand() % 500 - 250, rand() % 500 - 250, 0, 5, 0, 0, 0, 0, (rand() % 2 - 0.5) / 10, (rand() % 2 - 0.5) / 10, 1);
+			scene.SceneSet(i, rand() % 500 - 250, rand() % 500 - 250, 0, 5, 0, 0, 0, 0, (rand() % 4 - 1.5) / 5, (rand() % 4 - 1.5) / 5, 1);
 		mousecheck = true;
-		//scene.SceneSet(cnt,x-250,-(y-250),0,5,0,0,0,0,0.005,0,1);
-		//cnt++;
 	}
 	RenderScene();
 }
