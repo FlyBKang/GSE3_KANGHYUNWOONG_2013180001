@@ -1,8 +1,7 @@
 #include "stdafx.h"
 #include "Object.h"
 #define COLOR 0.0039215
-
-Object::Object(float x, float y, float z, float size, float r, float g, float b, float a, float vx, float vy, int  mod)
+Object::Object(float x, float y, float z, float size, float r, float g, float b, float a, float vx, float vy, int l,int lt, int  mod)
 {
 	Object_x = x;
 	Object_y = y;
@@ -15,8 +14,8 @@ Object::Object(float x, float y, float z, float size, float r, float g, float b,
 	Object_vx = vx;
 	Object_vy = vy;
 	Object_mod = mod;
-	Object_Life = 10;
-	Object_LifeTime = 10000;
+	Object_Life = l;
+	Object_LifeTime = lt;
 }
 void Object::Draw(Renderer * g_Renderer)
 {
@@ -130,9 +129,15 @@ void Object::Draw(Renderer * g_Renderer)
 			g_Renderer->DrawSolidRect(Object_x, Object_y - Object_size, Object_z, Object_size * 3, COLOR * 177, COLOR * 120, COLOR * 78, 0);
 
 		}
+		if (Object_mod == 6)//arrow
+		{
+			g_Renderer->DrawSolidRect(Object_x, Object_y+Object_size, Object_z, Object_size * 1, COLOR * 255, COLOR * 255, COLOR * 255, 0);
+			g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size * 1, COLOR * 255, COLOR * 255, COLOR * 255, 0);
+			g_Renderer->DrawSolidRect(Object_x, Object_y- +Object_size, Object_z, Object_size * 1, COLOR * 255, COLOR * 255, COLOR * 255, 0);
+		}
 	}
 }
-void Object::Set(float x, float y, float z, float size, float r, float g, float b, float a, float vx, float vy, int  mod)
+void Object::Set(float x, float y, float z, float size, float r, float g, float b, float a, float vx, float vy, int l, int lt, int  mod)
 {
 	Object_x = x;
 	Object_y = y;
@@ -145,8 +150,8 @@ void Object::Set(float x, float y, float z, float size, float r, float g, float 
 	Object_vx = vx;
 	Object_vy = vy;
 	Object_mod = mod;
-	Object_Life = 10;
-	Object_LifeTime = 10000;
+	Object_Life = l;
+	Object_LifeTime = lt;
 }
 
 float Object::GetX(){ return Object_x; }

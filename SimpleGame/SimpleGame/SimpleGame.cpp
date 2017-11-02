@@ -17,7 +17,7 @@ but WITHOUT ANY WARRANTY.
 #include "SceneMgr.h"
 using namespace std;
 
-SceneMgr scene;
+SceneMgr* scene = new SceneMgr();
 int cnt = 0;
 bool mousecheck = false;
 
@@ -25,13 +25,14 @@ void RenderScene(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor(0.0f, 0.3f, 0.3f, 1.0f);
-
-	if (mousecheck == true)
+	if (cnt == 0)
 	{
-		scene.Rendering(MAX);
-		scene.Checking();
-		scene.Moding();
+		scene->SceneSet(cnt, 0, 0, 0, OBJECT_BUILDING);
+		cnt++;
 	}
+	scene->Rendering(MAX);
+	scene->Checking();
+	scene->Moding();
 
 	glutSwapBuffers();
 }
@@ -43,7 +44,7 @@ void MouseInput(int button, int state, int x, int y)
 {
 	if ((button == GLUT_LEFT_BUTTON && state == GLUT_DOWN))
 	{
-		scene.SceneSet(cnt, rand() % 500 - 250, rand() % 500 - 250, 0, 5, 0, 0, 0, 0, (rand() % 11 - 5), (rand() % 11 - 5)  , 1);
+		scene->SceneSet(cnt, x - 250, -(y - 250), 0, OBJECT_CHARACTER);
 		cnt++;
 		mousecheck = true;
 	}
@@ -56,9 +57,17 @@ void KeyInput(unsigned char key, int x, int y)
 void SpecialKeyInput(int key, int x, int y)
 {
 }
+int checkbullet = 0;
 void timeGetTime(int value)
 {
 	glutTimerFunc(TIME, timeGetTime, 1);
+	checkbullet++;
+	if (checkbullet > 50)
+	{
+		scene->SceneSet(cnt, 0, 0, 0, OBJECT_BULLET);
+		cnt++;
+		checkbullet = 0;
+	}
 	RenderScene();
 }
 int main(int argc, char **argv)
@@ -71,7 +80,7 @@ int main(int argc, char **argv)
 	glutCreateWindow("Game Software Engineering KPU");
 
 	glewInit();
-	scene.Rising();
+	scene->Rising();
 	if (glewIsSupported("GL_VERSION_3_0"))
 	{
 		std::cout << " GLEW Version is 3.0\n ";
@@ -89,6 +98,8 @@ int main(int argc, char **argv)
 	glutTimerFunc(TIME, timeGetTime, 1);
 	glutMainLoop();
 
+	scene->Ending();
+	delete(scene);
     return 0;
 }
 

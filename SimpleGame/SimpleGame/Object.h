@@ -18,7 +18,7 @@ class Object
 
 public:
 	Object();
-	Object(float x, float y, float z, float size, float r, float g, float b, float a,float vx, float vy, int  mod);
+	Object(float x, float y, float z, float size, float r, float g, float b, float a,float vx, float vy,  int l, int lt, int  mod);
 	~Object();
 	float GetX();
 	float GetY();
@@ -34,7 +34,7 @@ public:
 	float GetLife();
 	float GetTime();
 
-	void Set(float x, float y, float z, float size, float r, float g, float b, float a, float vx, float vy, int  mod);
+	void Set(float x, float y, float z, float size, float r, float g, float b, float a, float vx, float vy, int l, int lt, int  mod);
 	void SetX(float f);
 	void SetY(float f);
 	void SetZ(float f);
