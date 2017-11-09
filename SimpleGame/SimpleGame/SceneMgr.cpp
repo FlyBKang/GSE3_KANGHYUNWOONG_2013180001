@@ -12,50 +12,51 @@ void SceneMgr::Checking() {
 			if (i == j)
 				continue;
 
-			if (obj[i].GetLife()>0&& obj[j].GetLife()>0)
-				if (obj[i].GetTime()>0 && obj[j].GetTime()>0)
+			if ((obj[i].GetLife()>0&& obj[j].GetLife()>0) && (obj[i].GetTime()>0 && obj[j].GetTime()>0))
+				if (
+					(obj[i].GetY() + BREAK > obj[j].GetY()) && (obj[i].GetY() - BREAK < obj[j].GetY())
+					)
+				{
+					if (
+						(obj[i].GetX() + BREAK > obj[j].GetX()) && (obj[i].GetX() - BREAK < obj[j].GetX())
+						)
+					{
+						check[i] = 1;
+						if (obj[i].GetMod() == 1 && obj[j].GetMod() == 4)
+						{
+							obj[j].SetLife(obj[j].GetLife() - obj[i].GetLife());
+							obj[i].SetLife(0);
+							cout << "빌딩 HP" << obj[j].GetLife() << endl;
+						}
+						if (obj[i].GetMod() == 0 && obj[j].GetMod() == 1)
+						{
+							obj[j].SetLife(obj[j].GetLife() - obj[i].GetLife());
+							obj[i].SetLife(0);
+						}
+					}
+				}
+				else if(
+					(obj[i].GetX() + BREAK > obj[j].GetX())&& (obj[i].GetX() - BREAK < obj[j].GetX())
+					)
+				{
 					if (
 						(obj[i].GetY() + BREAK > obj[j].GetY()) && (obj[i].GetY() - BREAK < obj[j].GetY())
 						)
 					{
-						if (
-							(obj[i].GetX() + BREAK > obj[j].GetX()) && (obj[i].GetX() - BREAK < obj[j].GetX())
-							)
+						check[i] = 1;
+						if (obj[i].GetMod() == 1 && obj[j].GetMod() == 4)
 						{
-							check[i] = 1;
-							if (obj[i].GetMod() == 1 && obj[j].GetMod() == 4)
-							{
-								obj[j].SetLife(obj[j].GetLife() - obj[i].GetLife());
-								obj[i].SetLife(0);
-							}
-							if (obj[i].GetMod() == 0 && obj[j].GetMod() == 1)
-							{
-								obj[j].SetLife(obj[j].GetLife() - obj[i].GetLife());
-								obj[i].SetLife(0);
-							}
+							obj[j].SetLife(obj[j].GetLife() - obj[i].GetLife());
+							obj[i].SetLife(0);
+							cout << "빌딩 HP"<<obj[j].GetLife() << endl;
+						}
+						if (obj[i].GetMod() == 0 && obj[j].GetMod() == 1)
+						{
+							obj[j].SetLife(obj[j].GetLife() - obj[i].GetLife());
+							obj[i].SetLife(0);
 						}
 					}
-					else if(
-						(obj[i].GetX() + BREAK > obj[j].GetX())&& (obj[i].GetX() - BREAK < obj[j].GetX())
-						)
-					{
-						if (
-							(obj[i].GetY() + BREAK > obj[j].GetY()) && (obj[i].GetY() - BREAK < obj[j].GetY())
-							)
-						{
-							check[i] = 1;
-							if (obj[i].GetMod() == 1 && obj[j].GetMod() == 4)
-							{
-								obj[j].SetLife(obj[j].GetLife() - obj[i].GetLife());
-								obj[i].SetLife(0);
-							}
-							if (obj[i].GetMod() == 0 && obj[j].GetMod() == 1)
-							{
-								obj[j].SetLife(obj[j].GetLife() - obj[i].GetLife());
-								obj[i].SetLife(0);
-							}
-						}
-					}
+				}
 		}
 	}
 }
@@ -64,13 +65,9 @@ void SceneMgr::Moding()
 	for (int i = 0; i < MAX; ++i)
 		if (check[i]) 
 		{
-			//if (obj[i].GetMod() == 1)
-			//	obj[i].SetMod(2);
-			//else
-			//	obj[i].SetMod(6);
 			check[i] = 0;
 			obj[i].SetLife(obj[i].GetLife() - 1);
-		}
+		}//모든 모브젝트의 충돌을 관리
 }
 
 void SceneMgr::Rendering(int n)
