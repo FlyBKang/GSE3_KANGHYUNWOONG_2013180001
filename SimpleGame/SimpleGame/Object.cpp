@@ -17,15 +17,15 @@ Object::Object(float x, float y, float z, float size, float r, float g, float b,
 	Object_Life = l;
 	Object_LifeTime = lt;
 }
-void Object::Draw(Renderer * g_Renderer)
+void Object::Draw(Renderer * g_Renderer, GLuint m_texCharacter)
 {
 	if (Object_Life > 0 && Object_LifeTime > 0)
 	{
 		if (Object_mod == 0) //Box
 		{
-			g_Renderer->DrawTexturedRect(Object_x, Object_y, Object_z, Object_size, Object_r, Object_g, Object_b, Object_a, m_texCharacter);
+			g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size, Object_r, Object_g, Object_b, Object_a);
 		}
-		if (Object_mod == 1) //Fire
+		if (Object_mod == 1) //Fire m_texCharacter
 		{
 			g_Renderer->DrawSolidRect(Object_x - Object_size, Object_y - Object_size, Object_z, Object_size, 1, 0, 0, 1);
 			g_Renderer->DrawSolidRect(Object_x, Object_y - Object_size, Object_z, Object_size, 1, 1, 0, 1);
@@ -68,31 +68,7 @@ void Object::Draw(Renderer * g_Renderer)
 		}
 		if (Object_mod == 4)//castle wall
 		{
-			g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size * 5, COLOR * 76, COLOR * 74, COLOR * 71, 1);
-
-			g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 1);
-			g_Renderer->DrawSolidRect(Object_x + Object_size * 2, Object_y, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 1);
-			g_Renderer->DrawSolidRect(Object_x - Object_size * 2, Object_y, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 1);
-
-			g_Renderer->DrawSolidRect(Object_x, Object_y + Object_size * 2, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 1);
-			g_Renderer->DrawSolidRect(Object_x + Object_size * 2, Object_y + Object_size * 2, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 1);
-			g_Renderer->DrawSolidRect(Object_x - Object_size * 2, Object_y + Object_size * 2, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 1);
-			g_Renderer->DrawSolidRect(Object_x + Object_size, Object_y + Object_size * 2, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 1);
-			g_Renderer->DrawSolidRect(Object_x - Object_size, Object_y + Object_size * 2, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 1);
-
-			g_Renderer->DrawSolidRect(Object_x, Object_y - Object_size * 2, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 1);
-			g_Renderer->DrawSolidRect(Object_x + Object_size * 2, Object_y - Object_size * 2, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 1);
-			g_Renderer->DrawSolidRect(Object_x - Object_size * 2, Object_y - Object_size * 2, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 1);
-
-			g_Renderer->DrawSolidRect(Object_x, Object_y + Object_size * 3, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 1);
-			g_Renderer->DrawSolidRect(Object_x + Object_size * 2, Object_y + Object_size * 3, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 1);
-			g_Renderer->DrawSolidRect(Object_x - Object_size * 2, Object_y + Object_size * 3, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 1);
-
-			g_Renderer->DrawSolidRect(Object_x + Object_size, Object_y + Object_size, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 1);
-			g_Renderer->DrawSolidRect(Object_x - Object_size, Object_y + Object_size, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 1);
-
-			g_Renderer->DrawSolidRect(Object_x + Object_size, Object_y - Object_size, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 1);
-			g_Renderer->DrawSolidRect(Object_x - Object_size, Object_y - Object_size, Object_z, Object_size, COLOR * 43, COLOR * 41, COLOR * 41, 1);
+			g_Renderer->DrawTexturedRect(Object_x, Object_y, Object_z, Object_size, Object_r, Object_g, Object_b, Object_a,m_texCharacter);
 		}
 		if (Object_mod == 5)//castle 
 		{

@@ -1,6 +1,5 @@
 #pragma once
 #include "Renderer.h"
-#include "LoadPng.h"
 class Object
 {
 	float Object_x;					// Æ÷Áö¼Ç
@@ -53,5 +52,5 @@ public:
 	void SetTime(float f);
 	void Update(float Time);
 	void SetArrow(int n);
-	void Draw(Renderer *g_Renderer);
+	void Draw(Renderer *g_Renderer, GLuint m_texCharacter);
 };

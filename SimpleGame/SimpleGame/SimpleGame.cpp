@@ -61,8 +61,8 @@ void timeGetTime(int value) //10ms당 1번 켜짐 -> 0.5초는 500ms 50번
 	checkbullet++;
 	if (checkbullet > 50)
 	{
-		//scene->SceneSet(cnt, 0, 0, 0, OBJECT_BULLET);
-		//cnt++;
+		scene->SceneSet(cnt, 0, 0, 0, OBJECT_BULLET);
+		cnt++;
 		checkbullet = 0;
 		cnt = scene->Moding(cnt);
 		

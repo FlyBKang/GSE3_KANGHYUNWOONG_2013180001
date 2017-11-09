@@ -37,11 +37,11 @@ void SceneMgr::Checking() {
 						}
 						if (obj[i].GetMod() == 6 && obj[j].GetMod() == 1)
 						{
-							if (i < j && i + obj[j].GetArrow() < j)
+							if (obj[i].GetArrow() != j)
 							{
 								obj[j].SetLife(obj[j].GetLife() - obj[i].GetLife());
 								obj[i].SetLife(0);
-								cout << "arrow"<< endl;
+								cout << "arrow" << endl;
 							}
 						}
 						if (obj[i].GetMod() == 6 && obj[j].GetMod() == 4)
@@ -73,10 +73,11 @@ void SceneMgr::Checking() {
 						}
 						if (obj[i].GetMod() == 6 && obj[j].GetMod() == 1)
 						{
-							if (i < j && i + obj[j].GetArrow() < j)
+							if (obj[i].GetArrow()!=j)
 							{ 
 								obj[j].SetLife(obj[j].GetLife() - obj[i].GetLife());
 								obj[i].SetLife(0);
+
 								cout << "arrow" << endl;
 							}
 						}
@@ -95,9 +96,11 @@ int SceneMgr::Moding(int n)
 	for (int i = 0; i < MAX; ++i)
 		if (obj[i].GetMod() == 1&& obj[i].GetLife() >0 && obj[i].GetTime() >0)
 		{
-			SceneSet(n++, obj[i].GetX(), obj[i].GetY(),0, OBJECT_ARROW);
-			obj[i].SetArrow(obj[i].GetArrow()+1);
+			n++;
+			SceneSet(n, obj[i].GetX(), obj[i].GetY(),0, OBJECT_ARROW);
+			obj[n].SetArrow(i);
 		}
+	n++;
 	return n;
 }
 
@@ -108,7 +111,7 @@ void SceneMgr::Rendering(int n)
 	for (int i = 0;i<n;++i)
 	{
 		obj[i].Update(10.0);
-		obj[i].Draw(g_Renderer);
+		obj[i].Draw(g_Renderer, m_texCharacter);
 	}
 }
 void SceneMgr::SceneSet(int n, float x, float y, float z, float size, float r, float g, float b, float a, float vx, float vy, int l, int lt, int  mod) 
