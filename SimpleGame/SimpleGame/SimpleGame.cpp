@@ -19,7 +19,6 @@ using namespace std;
 
 int cnt = 0;
 SceneMgr* scene = new SceneMgr();
-bool mousecheck = false;
 
 void RenderScene(void)
 {
@@ -32,7 +31,6 @@ void RenderScene(void)
 	}
 	scene->Rendering(MAX);
 	scene->Checking();
-	//scene->Moding();
 
 	glutSwapBuffers();
 }
@@ -45,7 +43,7 @@ void MouseInput(int button, int state, int x, int y)
 	if ((button == GLUT_LEFT_BUTTON && state == GLUT_DOWN))
 	{
 		scene->SceneSet(cnt++, x - 250, -(y - 250), 0, OBJECT_CHARACTER);
-		mousecheck = true;
+		
 	}
 }
 
@@ -63,10 +61,11 @@ void timeGetTime(int value) //10ms당 1번 켜짐 -> 0.5초는 500ms 50번
 	checkbullet++;
 	if (checkbullet > 50)
 	{
-		scene->SceneSet(cnt, 0, 0, 0, OBJECT_BULLET);
-		cnt++;
-
+		//scene->SceneSet(cnt, 0, 0, 0, OBJECT_BULLET);
+		//cnt++;
 		checkbullet = 0;
+		cnt = scene->Moding(cnt);
+		
 	}
 	RenderScene();
 }

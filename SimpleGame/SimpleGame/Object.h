@@ -1,5 +1,6 @@
 #pragma once
 #include "Renderer.h"
+#include "LoadPng.h"
 class Object
 {
 	float Object_x;					// 포지션
@@ -15,6 +16,7 @@ class Object
 	int  Object_mod;				// 상태
 	float Object_Life;
 	float Object_LifeTime;
+	int Object_arrow;
 
 public:
 	Object();
@@ -33,6 +35,7 @@ public:
 	float GetVy();
 	float GetLife();
 	float GetTime();
+	int GetArrow();
 
 	void Set(float x, float y, float z, float size, float r, float g, float b, float a, float vx, float vy, int l, int lt, int  mod);
 	void SetX(float f);
@@ -49,5 +52,6 @@ public:
 	void SetLife(float f);
 	void SetTime(float f);
 	void Update(float Time);
+	void SetArrow(int n);
 	void Draw(Renderer *g_Renderer);
 };

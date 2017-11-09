@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "SceneMgr.h"
 
+
+
+
 SceneMgr::SceneMgr() {}
 SceneMgr::~SceneMgr() {}
 void SceneMgr::Checking() {
@@ -21,7 +24,6 @@ void SceneMgr::Checking() {
 						(obj[i].GetX() + BREAK > obj[j].GetX()) && (obj[i].GetX() - BREAK < obj[j].GetX())
 						)
 					{
-						check[i] = 1;
 						if (obj[i].GetMod() == 1 && obj[j].GetMod() == 4)
 						{
 							obj[j].SetLife(obj[j].GetLife() - obj[i].GetLife());
@@ -33,6 +35,21 @@ void SceneMgr::Checking() {
 							obj[j].SetLife(obj[j].GetLife() - obj[i].GetLife());
 							obj[i].SetLife(0);
 						}
+						if (obj[i].GetMod() == 6 && obj[j].GetMod() == 1)
+						{
+							if (i < j && i + obj[j].GetArrow() < j)
+							{
+								obj[j].SetLife(obj[j].GetLife() - obj[i].GetLife());
+								obj[i].SetLife(0);
+								cout << "arrow"<< endl;
+							}
+						}
+						if (obj[i].GetMod() == 6 && obj[j].GetMod() == 4)
+						{
+							obj[j].SetLife(obj[j].GetLife() - obj[i].GetLife());
+							obj[i].SetLife(0);
+							cout << "빌딩 HP" << obj[j].GetLife() << endl;
+						}
 					}
 				}
 				else if(
@@ -43,7 +60,6 @@ void SceneMgr::Checking() {
 						(obj[i].GetY() + BREAK > obj[j].GetY()) && (obj[i].GetY() - BREAK < obj[j].GetY())
 						)
 					{
-						check[i] = 1;
 						if (obj[i].GetMod() == 1 && obj[j].GetMod() == 4)
 						{
 							obj[j].SetLife(obj[j].GetLife() - obj[i].GetLife());
@@ -55,19 +71,34 @@ void SceneMgr::Checking() {
 							obj[j].SetLife(obj[j].GetLife() - obj[i].GetLife());
 							obj[i].SetLife(0);
 						}
+						if (obj[i].GetMod() == 6 && obj[j].GetMod() == 1)
+						{
+							if (i < j && i + obj[j].GetArrow() < j)
+							{ 
+								obj[j].SetLife(obj[j].GetLife() - obj[i].GetLife());
+								obj[i].SetLife(0);
+								cout << "arrow" << endl;
+							}
+						}
+						if (obj[i].GetMod() == 6 && obj[j].GetMod() == 4)
+						{
+							obj[j].SetLife(obj[j].GetLife() - obj[i].GetLife());
+							obj[i].SetLife(0);
+						}
 					}
 				}
 		}
 	}
 }
-void SceneMgr::Moding()
+int SceneMgr::Moding(int n)
 {
 	for (int i = 0; i < MAX; ++i)
-		if (check[i]) 
+		if (obj[i].GetMod() == 1&& obj[i].GetLife() >0 && obj[i].GetTime() >0)
 		{
-			check[i] = 0;
-			obj[i].SetLife(obj[i].GetLife() - 1);
-		}//모든 모브젝트의 충돌을 관리
+			SceneSet(n++, obj[i].GetX(), obj[i].GetY(),0, OBJECT_ARROW);
+			obj[i].SetArrow(obj[i].GetArrow()+1);
+		}
+	return n;
 }
 
 void SceneMgr::Rendering(int n)
