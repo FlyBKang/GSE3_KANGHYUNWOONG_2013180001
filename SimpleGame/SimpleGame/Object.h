@@ -2,6 +2,7 @@
 #include "Renderer.h"
 class Object
 {
+	GLint Object_Texture = NULL;
 	float Object_x;					// 포지션
 	float Object_y;					// 포지션
 	float Object_z;					// 포지션
@@ -15,7 +16,7 @@ class Object
 	int  Object_mod;				// 상태
 	float Object_Life;
 	float Object_LifeTime;
-	int Object_arrow;
+	int Object_arrow = -1;
 
 public:
 	Object();
@@ -51,6 +52,7 @@ public:
 	void SetLife(float f);
 	void SetTime(float f);
 	void Update(float Time);
-	void SetArrow(int n);
-	void Draw(Renderer *g_Renderer, GLuint m_texCharacter);
+	void SetArrow(int n); 
+	void SetTexture(GLint texture);
+	void Draw(Renderer *g_Renderer);
 };

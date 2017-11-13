@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Object.h"
-#define COLOR 0.0039215
+#include "LoadPng.h"
 Object::Object(float x, float y, float z, float size, float r, float g, float b, float a, float vx, float vy, int l,int lt, int  mod)
 {
 	Object_x = x;
@@ -17,7 +17,7 @@ Object::Object(float x, float y, float z, float size, float r, float g, float b,
 	Object_Life = l;
 	Object_LifeTime = lt;
 }
-void Object::Draw(Renderer * g_Renderer, GLuint m_texCharacter)
+void Object::Draw(Renderer * g_Renderer)
 {
 	if (Object_Life > 0 && Object_LifeTime > 0)
 	{
@@ -68,7 +68,7 @@ void Object::Draw(Renderer * g_Renderer, GLuint m_texCharacter)
 		}
 		if (Object_mod == 4)//castle wall
 		{
-			g_Renderer->DrawTexturedRect(Object_x, Object_y, Object_z, Object_size, Object_r, Object_g, Object_b, Object_a,m_texCharacter);
+			g_Renderer->DrawTexturedRect(Object_x, Object_y, Object_z, Object_size, Object_r, Object_g, Object_b, Object_a, Object_Texture);
 		}
 		if (Object_mod == 5)//castle 
 		{
@@ -144,6 +144,7 @@ float Object::GetTime() { return Object_LifeTime; }
 float Object::GetLife() { return Object_Life; }
 float Object::GetMod(){ return Object_mod;}
 int Object::GetArrow(){ return Object_arrow; }
+void Object::SetTexture(GLint texture) { Object_Texture = texture; }
 void Object::SetX(float f) { Object_x = f; }
 void Object::SetY(float f) { Object_y = f; }
 void Object::SetZ(float f) { Object_z = f; }

@@ -12,18 +12,16 @@ but WITHOUT ANY WARRANTY.
 #include <iostream>
 #include "Dependencies\glew.h"
 #include "Dependencies\freeglut.h"
-#include "Object.h"
-#include "Renderer.h"
 #include "SceneMgr.h"
 using namespace std;
 
 int cnt = 0;
 SceneMgr* scene = new SceneMgr();
-
 void RenderScene(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor(0.0f, 0.3f, 0.3f, 1.0f);
+	scene->TextureMaping();
 	if (cnt == 0)
 	{
 		scene->SceneSet(cnt, 0, 0, 0, OBJECT_BUILDING);

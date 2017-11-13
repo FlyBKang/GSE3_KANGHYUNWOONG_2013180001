@@ -1,9 +1,6 @@
 #include "stdafx.h"
 #include "SceneMgr.h"
 
-
-
-
 SceneMgr::SceneMgr() {}
 SceneMgr::~SceneMgr() {}
 void SceneMgr::Checking() {
@@ -17,18 +14,18 @@ void SceneMgr::Checking() {
 
 			if ((obj[i].GetLife()>0&& obj[j].GetLife()>0) && (obj[i].GetTime()>0 && obj[j].GetTime()>0))
 				if (
-					(obj[i].GetY() + BREAK > obj[j].GetY()) && (obj[i].GetY() - BREAK < obj[j].GetY())
+					(obj[i].GetY() + (obj[i].GetSize()/2) > obj[j].GetY()) && (obj[i].GetY() - (obj[i].GetSize() / 2) < obj[j].GetY())
 					)
 				{
 					if (
-						(obj[i].GetX() + BREAK > obj[j].GetX()) && (obj[i].GetX() - BREAK < obj[j].GetX())
+						(obj[i].GetX() + (obj[i].GetSize() / 2) > obj[j].GetX()) && (obj[i].GetX() - (obj[i].GetSize() / 2) < obj[j].GetX())
 						)
 					{
-						if (obj[i].GetMod() == 1 && obj[j].GetMod() == 4)
+						if (obj[i].GetMod() == 4 && obj[j].GetMod() == 1)
 						{
-							obj[j].SetLife(obj[j].GetLife() - obj[i].GetLife());
-							obj[i].SetLife(0);
-							cout << "網註 HP" << obj[j].GetLife() << endl;
+							obj[i].SetLife(obj[i].GetLife() - obj[j].GetLife());
+							obj[j].SetLife(0);
+							cout << "網註 HP" << obj[i].GetLife() << endl;
 						}
 						if (obj[i].GetMod() == 0 && obj[j].GetMod() == 1)
 						{
@@ -41,30 +38,29 @@ void SceneMgr::Checking() {
 							{
 								obj[j].SetLife(obj[j].GetLife() - obj[i].GetLife());
 								obj[i].SetLife(0);
-								cout << "arrow" << endl;
 							}
 						}
-						if (obj[i].GetMod() == 6 && obj[j].GetMod() == 4)
+						if (obj[i].GetMod() == 4 && obj[j].GetMod() == 6)
 						{
-							obj[j].SetLife(obj[j].GetLife() - obj[i].GetLife());
-							obj[i].SetLife(0);
-							cout << "網註 HP" << obj[j].GetLife() << endl;
+							obj[i].SetLife(obj[i].GetLife() - obj[j].GetLife());
+							obj[j].SetLife(0);
+							cout << "網註 HP" << obj[i].GetLife() << endl;
 						}
 					}
 				}
 				else if(
-					(obj[i].GetX() + BREAK > obj[j].GetX())&& (obj[i].GetX() - BREAK < obj[j].GetX())
+					(obj[i].GetX() + (obj[i].GetSize() / 2) > obj[j].GetX())&& (obj[i].GetX() - (obj[i].GetSize() / 2) < obj[j].GetX())
 					)
 				{
 					if (
-						(obj[i].GetY() + BREAK > obj[j].GetY()) && (obj[i].GetY() - BREAK < obj[j].GetY())
+						(obj[i].GetY() + (obj[i].GetSize() / 2) > obj[j].GetY()) && (obj[i].GetY() - (obj[i].GetSize() / 2) < obj[j].GetY())
 						)
 					{
-						if (obj[i].GetMod() == 1 && obj[j].GetMod() == 4)
+						if (obj[i].GetMod() == 4 && obj[j].GetMod() == 1)
 						{
-							obj[j].SetLife(obj[j].GetLife() - obj[i].GetLife());
-							obj[i].SetLife(0);
-							cout << "網註 HP"<<obj[j].GetLife() << endl;
+							obj[i].SetLife(obj[i].GetLife() - obj[j].GetLife());
+							obj[j].SetLife(0);
+							cout << "網註 HP"<<obj[i].GetLife() << endl;
 						}
 						if (obj[i].GetMod() == 0 && obj[j].GetMod() == 1)
 						{
@@ -77,14 +73,13 @@ void SceneMgr::Checking() {
 							{ 
 								obj[j].SetLife(obj[j].GetLife() - obj[i].GetLife());
 								obj[i].SetLife(0);
-
-								cout << "arrow" << endl;
 							}
 						}
-						if (obj[i].GetMod() == 6 && obj[j].GetMod() == 4)
+						if (obj[i].GetMod() == 4 && obj[j].GetMod() == 6)
 						{
-							obj[j].SetLife(obj[j].GetLife() - obj[i].GetLife());
-							obj[i].SetLife(0);
+							obj[i].SetLife(obj[i].GetLife() - obj[j].GetLife());
+							obj[j].SetLife(0);
+							cout << "網註 HP" << obj[i].GetLife() << endl;
 						}
 					}
 				}
@@ -111,7 +106,7 @@ void SceneMgr::Rendering(int n)
 	for (int i = 0;i<n;++i)
 	{
 		obj[i].Update(10.0);
-		obj[i].Draw(g_Renderer, m_texCharacter);
+		obj[i].Draw(g_Renderer);
 	}
 }
 void SceneMgr::SceneSet(int n, float x, float y, float z, float size, float r, float g, float b, float a, float vx, float vy, int l, int lt, int  mod) 
@@ -119,6 +114,8 @@ void SceneMgr::SceneSet(int n, float x, float y, float z, float size, float r, f
 	if (n >= MAX)
 		n = n%MAX;
 	obj[n].Set(x,y,z,size,r,g,b,a,vx,vy,l,lt,mod); 
+	if (mod == 4)
+		obj[n].SetTexture(Building_texCharacter);
 }
 void SceneMgr::Rising()
 {
@@ -127,4 +124,9 @@ void SceneMgr::Rising()
 void SceneMgr::Ending()
 {
 	delete(g_Renderer);
+}
+
+void  SceneMgr::TextureMaping()
+{
+	Building_texCharacter = g_Renderer->CreatePngTexture("Textures/texture1.png");
 }
