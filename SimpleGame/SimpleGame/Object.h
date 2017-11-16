@@ -17,10 +17,11 @@ class Object
 	float Object_Life;
 	float Object_LifeTime;
 	int Object_arrow = -1;
+	int Object_team;
 
 public:
 	Object();
-	Object(float x, float y, float z, float size, float r, float g, float b, float a,float vx, float vy,  int l, int lt, int  mod);
+	Object(float x, float y, float z, float size, float r, float g, float b, float a,float vx, float vy,  int l, int lt, int  mod,int t);
 	~Object();
 	float GetX();
 	float GetY();
@@ -36,8 +37,9 @@ public:
 	float GetLife();
 	float GetTime();
 	int GetArrow();
+	int GetTeam();
 
-	void Set(float x, float y, float z, float size, float r, float g, float b, float a, float vx, float vy, int l, int lt, int  mod);
+	void Set(float x, float y, float z, float size, float r, float g, float b, float a, float vx, float vy, int l, int lt, int  mod, int t);
 	void SetX(float f);
 	void SetY(float f);
 	void SetZ(float f);
@@ -52,7 +54,8 @@ public:
 	void SetLife(float f);
 	void SetTime(float f);
 	void Update(float Time);
-	void SetArrow(int n); 
+	void SetArrow(int n);
+	void SetTeam(int n);
 	void SetTexture(GLint texture);
 	void Draw(Renderer *g_Renderer);
 };

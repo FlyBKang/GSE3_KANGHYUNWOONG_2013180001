@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Object.h"
 #include "LoadPng.h"
-Object::Object(float x, float y, float z, float size, float r, float g, float b, float a, float vx, float vy, int l,int lt, int  mod)
+Object::Object(float x, float y, float z, float size, float r, float g, float b, float a, float vx, float vy, int l,int lt, int  mod,int t)
 {
 	Object_x = x;
 	Object_y = y;
@@ -16,6 +16,7 @@ Object::Object(float x, float y, float z, float size, float r, float g, float b,
 	Object_mod = mod;
 	Object_Life = l;
 	Object_LifeTime = lt;
+	Object_team = t;
 }
 void Object::Draw(Renderer * g_Renderer)
 {
@@ -23,17 +24,24 @@ void Object::Draw(Renderer * g_Renderer)
 	{
 		if (Object_mod == 0) //Box
 		{
-			g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size, Object_r, Object_g, Object_b, Object_a);
+			if(Object_team == 1)
+				g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size, 1,0,0, Object_a);
+			else
+				g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size, 0,0,1, Object_a);
 		}
 		if (Object_mod == 1) //Fire m_texCharacter
 		{
-			g_Renderer->DrawSolidRect(Object_x - Object_size, Object_y - Object_size, Object_z, Object_size, 1, 0, 0, 1);
-			g_Renderer->DrawSolidRect(Object_x, Object_y - Object_size, Object_z, Object_size, 1, 1, 0, 1);
-			g_Renderer->DrawSolidRect(Object_x + Object_size, Object_y - Object_size, Object_z, Object_size, 1, 0, 0,1);
-			g_Renderer->DrawSolidRect(Object_x - Object_size, Object_y, Object_z, Object_size, 1, 0, 0, 1);
-			g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size, 1, 0, 0, 1);
-			g_Renderer->DrawSolidRect(Object_x + Object_size, Object_y, Object_z, Object_size, 1, 0, 0, 1);
-			g_Renderer->DrawSolidRect(Object_x, Object_y + Object_size, Object_z, Object_size, 1, 0, 0, 1);
+			if (Object_team == 1)
+				g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size, 1, 0, 0, Object_a);
+			else
+				g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size, 0, 0, 1, Object_a);
+			//g_Renderer->DrawSolidRect(Object_x - Object_size, Object_y - Object_size, Object_z, Object_size, 1, 0, 0, 1);
+			//g_Renderer->DrawSolidRect(Object_x, Object_y - Object_size, Object_z, Object_size, 1, 1, 0, 1);
+			//g_Renderer->DrawSolidRect(Object_x + Object_size, Object_y - Object_size, Object_z, Object_size, 1, 0, 0,1);
+			//g_Renderer->DrawSolidRect(Object_x - Object_size, Object_y, Object_z, Object_size, 1, 0, 0, 1);
+			//g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size, 1, 0, 0, 1);
+			//g_Renderer->DrawSolidRect(Object_x + Object_size, Object_y, Object_z, Object_size, 1, 0, 0, 1);
+			//g_Renderer->DrawSolidRect(Object_x, Object_y + Object_size, Object_z, Object_size, 1, 0, 0, 1);
 		}
 		if (Object_mod == 2) //Skull
 		{
@@ -68,7 +76,7 @@ void Object::Draw(Renderer * g_Renderer)
 		}
 		if (Object_mod == 4)//castle wall
 		{
-			g_Renderer->DrawTexturedRect(Object_x, Object_y, Object_z, Object_size, Object_r, Object_g, Object_b, Object_a, Object_Texture);
+				g_Renderer->DrawTexturedRect(Object_x, Object_y, Object_z, Object_size, Object_r, Object_g, Object_b, Object_a, Object_Texture);
 		}
 		if (Object_mod == 5)//castle 
 		{
@@ -107,13 +115,14 @@ void Object::Draw(Renderer * g_Renderer)
 		}
 		if (Object_mod == 6)//arrow
 		{
-			g_Renderer->DrawSolidRect(Object_x, Object_y+Object_size, Object_z, Object_size * 1, COLOR * 255, COLOR * 255, COLOR * 255, 1);
-			g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size * 1, COLOR * 255, COLOR * 255, COLOR * 255, 1);
-			g_Renderer->DrawSolidRect(Object_x, Object_y- +Object_size, Object_z, Object_size * 1, COLOR * 255, COLOR * 255, COLOR * 255, 1);
+			if (Object_team == 1)
+				g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size, 0.5, 0.2, 0.7, Object_a);
+			else
+				g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size, 1, 1, 0, Object_a);
 		}
 	}
 }
-void Object::Set(float x, float y, float z, float size, float r, float g, float b, float a, float vx, float vy, int l, int lt, int  mod)
+void Object::Set(float x, float y, float z, float size, float r, float g, float b, float a, float vx, float vy, int l, int lt, int  mod,int t)
 {
 	Object_x = x;
 	Object_y = y;
@@ -125,9 +134,21 @@ void Object::Set(float x, float y, float z, float size, float r, float g, float 
 	Object_a = a;
 	Object_vx = vx;
 	Object_vy = vy;
+	if(mod==1)
+		if (t == 1)
+		{
+			Object_vx = 0;
+			Object_vy = SPEED*300;
+		}
+		else 
+		{
+			Object_vx = 0;
+			Object_vy = -SPEED * 300;
+		}
 	Object_mod = mod;
 	Object_Life = l;
 	Object_LifeTime = lt;
+	Object_team = t;
 }
 
 float Object::GetX(){ return Object_x; }
@@ -144,6 +165,7 @@ float Object::GetTime() { return Object_LifeTime; }
 float Object::GetLife() { return Object_Life; }
 float Object::GetMod(){ return Object_mod;}
 int Object::GetArrow(){ return Object_arrow; }
+int Object::GetTeam() { return Object_team; }
 void Object::SetTexture(GLint texture) { Object_Texture = texture; }
 void Object::SetX(float f) { Object_x = f; }
 void Object::SetY(float f) { Object_y = f; }
@@ -159,15 +181,16 @@ void Object::SetLife(float f) { Object_Life = f; }
 void Object::SetTime(float f) { Object_LifeTime = f; }
 void Object::SetMod(int n) { Object_mod = n; }
 void Object::SetArrow(int n) {Object_arrow = n; }
+void Object::SetTeam(int n) { Object_team = n; }
 void Object::Update(float Time)
 {
-	if (GetX() > 250)
+	if (GetX() > Horizontal/2)
 		SetVx(-GetVx()); 
-	if (GetY() > 250)
+	if (GetY() > Vertical / 2)
 		SetVy(-GetVy()); 
-	if (GetX() < -250)
+	if (GetX() < -Horizontal / 2)
 		SetVx(-GetVx());
-	if (GetY() < -250)
+	if (GetY() < -Vertical/2)
 		SetVy(-GetVy());
 	SetX(GetX() + GetVx());
 	SetY(GetY() + GetVy());
