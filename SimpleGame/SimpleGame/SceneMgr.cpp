@@ -26,7 +26,7 @@ void SceneMgr::Checking() {
 						{
 							obj[i].SetLife(obj[i].GetLife() - obj[j].GetLife());
 							obj[j].SetLife(0);
-							cout << "網註 HP" << obj[i].GetLife() << endl;
+							cout << "Team" << obj[i].GetTeam() << "廓 網註 HP" << obj[i].GetLife() << endl;
 						}
 						if (obj[i].GetMod() == 0 && obj[j].GetMod() == 1)
 						{
@@ -45,7 +45,7 @@ void SceneMgr::Checking() {
 						{
 							obj[i].SetLife(obj[i].GetLife() - obj[j].GetLife());
 							obj[j].SetLife(0);
-							cout << "網註 HP" << obj[i].GetLife() << endl;
+							cout << "Team"<<obj[i].GetTeam()<<" 網註 HP" << obj[i].GetLife() << endl;
 						}
 					}
 				}

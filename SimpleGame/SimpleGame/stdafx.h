@@ -9,7 +9,7 @@
 #define Vertical 800
 
 #define COLOR 0.0039215
-#define SPEED 0.0075
+#define SPEED 0.0050
 #define RANDOM (rand()%6 - 2.5)
 #define OBJECT_BUILDING  100, 0, 0, 0, 1,0, 0, 500, 1000000, 4
 #define OBJECT_CHARACTER  10, 1, 1, 0, 1,RANDOM * SPEED * 300,RANDOM * SPEED * 300 ,10,100000 , 1

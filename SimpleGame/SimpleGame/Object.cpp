@@ -25,16 +25,16 @@ void Object::Draw(Renderer * g_Renderer)
 		if (Object_mod == 0) //Box
 		{
 			if(Object_team == 1)
-				g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size, 1,0,0, Object_a);
-			else
 				g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size, 0,0,1, Object_a);
+			else
+				g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size, 1,0,0, Object_a);
 		}
 		if (Object_mod == 1) //Fire m_texCharacter
 		{
 			if (Object_team == 1)
-				g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size, 1, 0, 0, Object_a);
-			else
 				g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size, 0, 0, 1, Object_a);
+			else
+				g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size, 1, 0, 0, Object_a);
 			//g_Renderer->DrawSolidRect(Object_x - Object_size, Object_y - Object_size, Object_z, Object_size, 1, 0, 0, 1);
 			//g_Renderer->DrawSolidRect(Object_x, Object_y - Object_size, Object_z, Object_size, 1, 1, 0, 1);
 			//g_Renderer->DrawSolidRect(Object_x + Object_size, Object_y - Object_size, Object_z, Object_size, 1, 0, 0,1);
@@ -116,9 +116,9 @@ void Object::Draw(Renderer * g_Renderer)
 		if (Object_mod == 6)//arrow
 		{
 			if (Object_team == 1)
-				g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size, 0.5, 0.2, 0.7, Object_a);
-			else
 				g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size, 1, 1, 0, Object_a);
+			else
+				g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size, 0.5, 0.2, 0.7, Object_a);
 		}
 	}
 }

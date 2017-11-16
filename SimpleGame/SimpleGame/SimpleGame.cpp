@@ -40,7 +40,7 @@ void RenderScene(void)
 		cnt++;				  
 		scene->SceneSet(cnt, T2B2, OBJECT_BUILDING, 2);
 		cnt++;				  
-		scene->SceneSet(cnt, T2B3, OBJECT_BUILDING,2);
+		scene->SceneSet(cnt, T2B3, OBJECT_BUILDING, 2);
 		cnt++;
 	}
 	scene->Rendering(MAX);
