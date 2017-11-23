@@ -30,17 +30,17 @@ void RenderScene(void)
 	scene->TextureMaping();
 	if (cnt == 0)
 	{
-		scene->SceneSet(cnt, T1B1, OBJECT_BUILDING,1);
+		scene->SceneSet(cnt, T1B1, OBJECT_BUILDING,1,LEVEL_GROUND);
 		cnt++;
-		scene->SceneSet(cnt, T1B2, OBJECT_BUILDING,1);
+		scene->SceneSet(cnt, T1B2, OBJECT_BUILDING,1, LEVEL_GROUND);
 		cnt++;
-		scene->SceneSet(cnt, T1B3, OBJECT_BUILDING,1);
+		scene->SceneSet(cnt, T1B3, OBJECT_BUILDING,1, LEVEL_GROUND);
 		cnt++;
-		scene->SceneSet(cnt, T2B1, OBJECT_BUILDING, 2);
+		scene->SceneSet(cnt, T2B1, OBJECT_BUILDING, 2, LEVEL_GROUND);
 		cnt++;				  
-		scene->SceneSet(cnt, T2B2, OBJECT_BUILDING, 2);
+		scene->SceneSet(cnt, T2B2, OBJECT_BUILDING, 2, LEVEL_GROUND);
 		cnt++;				  
-		scene->SceneSet(cnt, T2B3, OBJECT_BUILDING, 2);
+		scene->SceneSet(cnt, T2B3, OBJECT_BUILDING, 2, LEVEL_GROUND);
 		cnt++;
 	}
 	scene->Rendering(MAX);
@@ -59,9 +59,9 @@ void MouseInput(int button, int state, int x, int y)
 		if (!charcooldown)
 		{
 			if((Vertical / 2) - y > 0)
-				scene->SceneSet(cnt++, x - (Horizontal / 2), 0, 0, OBJECT_CHARACTER, 1);
+				scene->SceneSet(cnt++, x - (Horizontal / 2), 0, 0, OBJECT_CHARACTER, 1, LEVEL_UNDERGROUND);
 			else
-				scene->SceneSet(cnt++, x - (Horizontal / 2), ((Vertical / 2) - y), 0, OBJECT_CHARACTER, 1);
+				scene->SceneSet(cnt++, x - (Horizontal / 2), ((Vertical / 2) - y), 0, OBJECT_CHARACTER, 1, LEVEL_UNDERGROUND);
 			charcooldown = true;
 		}
 	}
@@ -83,46 +83,46 @@ void timeGetTime(int value) //10ms당 1번 켜짐 -> 0.5초는 500ms 50번
 	t2checkchar++;
 	if(charcooldown)
 		t1checkchar++;
-	if (t1checkchar > 700)
+	if (t1checkchar > TIMER_PLAYERCOOL)
 	{
 		charcooldown = false;
 		t1checkchar = 0;
 	}
-	if (t2checkchar > 500)
+	if (t2checkchar > TIMER_ENEMYPLAYER)
 	{
 		switch (rand() % 3)
 		{
 		case 0:
 		{
-			scene->SceneSet(cnt, T2B1, OBJECT_CHARACTER, 2); cnt++;
+			scene->SceneSet(cnt, T2B1, OBJECT_CHARACTER, 2, LEVEL_UNDERGROUND); cnt++;
 			break;
 		}
 		case 1:
 		{
-			scene->SceneSet(cnt, T2B2, OBJECT_CHARACTER, 2); cnt++;
+			scene->SceneSet(cnt, T2B2, OBJECT_CHARACTER, 2, LEVEL_UNDERGROUND); cnt++;
 			break;
 		}
 		case 2:
 		{
-			scene->SceneSet(cnt, T2B3, OBJECT_CHARACTER, 2); cnt++;
+			scene->SceneSet(cnt, T2B3, OBJECT_CHARACTER, 2, LEVEL_UNDERGROUND); cnt++;
 			break;
 		}
 		}
 		t2checkchar = 0;
 	}
-	if (checkarrow > 300)
+	if (checkarrow > TIMER_ARROW)
 	{
 		cnt = scene->Moding(cnt);
 		checkarrow = 0;
 	}
-	if (checkbullet > 1000)
+	if (checkbullet > TIMER_BULLET)
 	{
-		scene->SceneSet(cnt, T1B1, OBJECT_BULLET, 1); cnt++;
-		scene->SceneSet(cnt, T1B2, OBJECT_BULLET, 1); cnt++;
-		scene->SceneSet(cnt, T1B3, OBJECT_BULLET, 1); cnt++;
-		scene->SceneSet(cnt, T2B1, OBJECT_BULLET, 2); cnt++;
-		scene->SceneSet(cnt, T2B2, OBJECT_BULLET, 2); cnt++;
-		scene->SceneSet(cnt, T2B3, OBJECT_BULLET, 2); cnt++;
+		scene->SceneSet(cnt, T1B1, OBJECT_BULLET, 1, LEVEL_SKY); cnt++;
+		scene->SceneSet(cnt, T1B2, OBJECT_BULLET, 1, LEVEL_SKY); cnt++;
+		scene->SceneSet(cnt, T1B3, OBJECT_BULLET, 1, LEVEL_SKY); cnt++;
+		scene->SceneSet(cnt, T2B1, OBJECT_BULLET, 2, LEVEL_SKY); cnt++;
+		scene->SceneSet(cnt, T2B2, OBJECT_BULLET, 2, LEVEL_SKY); cnt++;
+		scene->SceneSet(cnt, T2B3, OBJECT_BULLET, 2, LEVEL_SKY); cnt++;
 		
 		checkbullet = 0;
 	}

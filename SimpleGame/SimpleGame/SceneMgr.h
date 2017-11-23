@@ -15,7 +15,7 @@ class SceneMgr
 public:
 	SceneMgr();
 	~SceneMgr();
-	void SceneSet(int n, float x, float y, float z, float size, float r, float g, float b, float a, float vx, float vy, int l, int lt, int  mod,int t);
+	void SceneSet(int n, float x, float y, float z, float size, float r, float g, float b, float a, float vx, float vy, int l, int lt, int  mod,int t,float le);
 	void Checking();
 	int Moding(int n);
 	void Rendering(int n);
