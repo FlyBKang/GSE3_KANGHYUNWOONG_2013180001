@@ -16,13 +16,13 @@
 #define OBJECT_BULLET  5, 1, 0, 0, 1, RANDOM * SPEED * 600,RANDOM * SPEED * 600, 20, 100000, 0
 #define OBJECT_ARROW  5, 0, 1, 0, 1, RANDOM * SPEED * 100, RANDOM * SPEED * 100, 10, 100000, 6
 
-#define T1B1 150,-300,0
+#define T1B1 -150,-300,0
 #define T1B2 0,-300,0
-#define T1B3 -150,-300,0
+#define T1B3 150,-300,0
 
-#define T2B1 150,300,0 
+#define T2B1 -150,300,0 
 #define T2B2  0,300,0
-#define T2B3 -150,300,0
+#define T2B3 150,300,0
 
 #define MAX 1000
 #define TIME 10

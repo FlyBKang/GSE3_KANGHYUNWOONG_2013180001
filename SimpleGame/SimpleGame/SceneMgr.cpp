@@ -26,7 +26,7 @@ void SceneMgr::Checking() {
 						{
 							obj[i].SetLife(obj[i].GetLife() - obj[j].GetLife());
 							obj[j].SetLife(0);
-							cout << "Team" << obj[i].GetTeam() << "¹ø ºôµù HP" << obj[i].GetLife() << endl;
+							cout << "Team" << obj[i].GetTeam() << " ºôµù HP" << obj[i].GetLife() << endl;
 						}
 						if (obj[i].GetMod() == 0 && obj[j].GetMod() == 1)
 						{
