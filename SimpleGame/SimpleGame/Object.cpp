@@ -28,11 +28,11 @@ void Object::Draw(Renderer * g_Renderer)
 		{
 			if (Object_team == 1)
 			{
-				g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size, 1, 0, 0, Object_a, Object_level);
+				g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size, 0, 0, 1, Object_a, Object_level);
 			}
 			else
 			{
-				g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size, 0, 0, 1, Object_a, Object_level);
+				g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size, 1, 0, 0, Object_a, Object_level);
 			}
 		}
 		if (Object_mod == 1) //Fire m_texCharacter
