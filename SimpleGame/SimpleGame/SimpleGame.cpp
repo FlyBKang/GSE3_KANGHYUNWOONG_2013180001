@@ -27,9 +27,11 @@ void RenderScene(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor(0.0f, 0.3f, 0.3f, 1.0f);
-	scene->TextureMaping();
+
+	
 	if (cnt == 0)
 	{
+		scene->TextureMaping();
 		cnt++;
 		scene->SceneSet(cnt, T1B1, OBJECT_BUILDING,1,LEVEL_GROUND);
 		cnt++;
@@ -118,13 +120,7 @@ void timeGetTime(int value) //10ms당 1번 켜짐 -> 0.5초는 500ms 50번
 	}
 	if (checkbullet > TIMER_BULLET)
 	{
-		scene->SceneSet(cnt, T1B1, OBJECT_BULLET, 1, LEVEL_SKY); cnt++;
-		scene->SceneSet(cnt, T1B2, OBJECT_BULLET, 1, LEVEL_SKY); cnt++;
-		scene->SceneSet(cnt, T1B3, OBJECT_BULLET, 1, LEVEL_SKY); cnt++;
-		scene->SceneSet(cnt, T2B1, OBJECT_BULLET, 2, LEVEL_SKY); cnt++;
-		scene->SceneSet(cnt, T2B2, OBJECT_BULLET, 2, LEVEL_SKY); cnt++;
-		scene->SceneSet(cnt, T2B3, OBJECT_BULLET, 2, LEVEL_SKY); cnt++;
-		
+		scene->ShotBullet(cnt);
 		checkbullet = 0;
 	}
 	RenderScene();

@@ -2,11 +2,13 @@
 #include "stdafx.h"
 #include "Object.h"
 #include "Renderer.h"
+#include "Sound.h"
 
 using namespace std;
 
 class SceneMgr
 {
+	Sound *m_sound = new Sound();
 	Renderer *g_Renderer;
 	GLuint Building_texCharacter1;
 	GLuint Building_texCharacter2;
@@ -25,4 +27,16 @@ public:
 	void Rising();
 	void Ending();
 	void TextureMaping();
+	int ShotBullet(int cnt)
+	{
+		for (int i = 0; i < MAX; ++i)
+		{
+			if (obj[i].GetMod() == 4 && obj[i].GetLife() > 0)
+			{
+				SceneSet(cnt, obj[i].GetX(), obj[i].GetY(),0, OBJECT_BULLET, obj[i].GetTeam(), LEVEL_SKY);
+				++cnt;
+			}
+		}
+		return cnt;
+	}
 };

@@ -82,6 +82,8 @@ int SceneMgr::Moding(int n)
 void SceneMgr::Rendering(int n)
 {
 	g_Renderer->DrawTexturedRect(0, 0, 0, 800, 1, 1, 1, 1, Background_texCharacter, 0.99);
+
+	g_Renderer->DrawTextW(-40.0f,0, GLUT_BITMAP_HELVETICA_18,1,1,1,"Insert Coin");
 	if (n >= MAX)
 		n = MAX;
 	for (int i = 0;i<n;++i)
@@ -117,6 +119,8 @@ void SceneMgr::Ending()
 
 void  SceneMgr::TextureMaping()
 {
+	auto soundBGM = m_sound->CreateSound("Sounds/bgm.mp3");
+	m_sound->PlaySound(soundBGM,true,0.2f);
 	Background_texCharacter = g_Renderer->CreatePngTexture("Textures/background.png");
 	char_texCharacter = g_Renderer->CreatePngTexture("Textures/animation.png");
 	Building_texCharacter1 = g_Renderer->CreatePngTexture("Textures/texture2.png");
