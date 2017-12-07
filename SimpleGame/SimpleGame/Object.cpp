@@ -28,23 +28,35 @@ void Object::Draw(Renderer * g_Renderer)
 		{
 			if (Object_team == 1)
 			{
-				g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size, 0, 0, 1, Object_a, Object_level);
+				g_Renderer->DrawParticle(Object_x, Object_y, Object_z, Object_size/2, 0.0f, 0.0f, 1.0f, Object_a, -Object_vx, -Object_vy, Object_Texture, PartcleTime);
+				g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size, 0.0f, 0.0f, 1.0f, Object_a, Object_level);
 			}
 			else
 			{
-				g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size, 1, 0, 0, Object_a, Object_level);
+				g_Renderer->DrawParticle(Object_x, Object_y, Object_z, Object_size/2,  1.0f, 0.0f, 0.0f, Object_a, -Object_vx, -Object_vy, Object_Texture, PartcleTime);
+				g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size, 1.0f, 0.0f, 0.0f, Object_a, Object_level);
 			}
+			PartcleTime +=1.0f;
 		}
 		if (Object_mod == 1) //Fire m_texCharacter
 		{
+			if ((int)Object_LifeTime % 100 < 25)
+				animationX = 0;
+			else if ((int)Object_LifeTime % 100 < 50)
+				animationX = 1;
+			else if ((int)Object_LifeTime % 100 < 75)
+				animationX = 2;
+			else if ((int)Object_LifeTime % 100 < 100)
+				animationX = 3;
+
 			if (Object_team == 1)
 			{
-				g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size, 0, 0, 1, Object_a, Object_level);
+				g_Renderer->DrawTexturedRectSeq( Object_x, Object_y, Object_z, Object_size, 0.0f, 0.0f, 1.0f, Object_a,Object_Texture, animationX, animationY, 4, 1, Object_level);
 				g_Renderer->DrawSolidRectGauge(Object_x, Object_y + Object_size / 2 + GAGE_SPACE, Object_z, Object_size, Object_size / 10, 0, 0, 1, 1, Object_Life/PLAYER_LIFE, Object_level);
 			}
 			else
 			{
-				g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size, 1, 0, 0, Object_a, Object_level); 
+				g_Renderer->DrawTexturedRectSeq(Object_x, Object_y, Object_z, Object_size, 1.0f, 0.0f, 0.0f, Object_a,Object_Texture, animationX, animationY, 4, 1, Object_level);
 				g_Renderer->DrawSolidRectGauge(Object_x, Object_y + Object_size / 2 + GAGE_SPACE, Object_z, Object_size, Object_size / 10, 1,0,0, 1, Object_Life / PLAYER_LIFE, Object_level);
 			}
 			//g_Renderer->DrawSolidRect(Object_x - Object_size, Object_y - Object_size, Object_z, Object_size, 1, 0, 0, 1, 1);
@@ -137,7 +149,7 @@ void Object::Draw(Renderer * g_Renderer)
 			else
 				g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size, 0.5, 0.2, 0.7, Object_a, Object_level);
 		}
-	}
+}
 }
 void Object::Set(float x, float y, float z, float size, float r, float g, float b, float a, float vx, float vy, int l, int lt, int  mod,int t,float le)
 {

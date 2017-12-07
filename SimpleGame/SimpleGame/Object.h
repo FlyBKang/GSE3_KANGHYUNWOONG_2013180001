@@ -20,6 +20,9 @@ class Object
 	int Object_team;
 	float Object_level;
 	float Object_gage;
+	int animationX = 0;
+	int animationY = 0;
+	float PartcleTime = 0.0f;
 
 public:
 	Object();
@@ -61,6 +64,5 @@ public:
 	void SetTeam(int n);
 	void SetTexture(GLint texture);
 	void Draw(Renderer *g_Renderer);
-
 	void SetGage(float f);
 };

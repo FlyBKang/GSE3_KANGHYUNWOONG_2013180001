@@ -79,9 +79,9 @@ int SceneMgr::Moding(int n)
 	n++;
 	return n;
 }
-
 void SceneMgr::Rendering(int n)
 {
+	g_Renderer->DrawTexturedRect(0, 0, 0, 800, 1, 1, 1, 1, Background_texCharacter, 0.99);
 	if (n >= MAX)
 		n = MAX;
 	for (int i = 0;i<n;++i)
@@ -94,12 +94,17 @@ void SceneMgr::SceneSet(int n, float x, float y, float z, float size, float r, f
 {
 	if (n >= MAX)
 		n = n%MAX;
-	obj[n].Set(x,y,z,size,r,g,b,a,vx,vy,l,lt,mod,t,le); 
+	obj[n].Set(x, y, z, size, r, g, b, a, vx, vy, l, lt, mod, t, le);
 	if (mod == 4)
 		if(obj[n].GetTeam() == 1)
 			obj[n].SetTexture(Building_texCharacter1);
 		else
 			obj[n].SetTexture(Building_texCharacter2);
+	if(mod == 1)
+		obj[n].SetTexture(char_texCharacter); 
+	if (mod == 0)
+		obj[n].SetTexture(particle_texCharacter);
+
 }
 void SceneMgr::Rising()
 {
@@ -112,6 +117,9 @@ void SceneMgr::Ending()
 
 void  SceneMgr::TextureMaping()
 {
+	Background_texCharacter = g_Renderer->CreatePngTexture("Textures/background.png");
+	char_texCharacter = g_Renderer->CreatePngTexture("Textures/animation.png");
 	Building_texCharacter1 = g_Renderer->CreatePngTexture("Textures/texture2.png");
 	Building_texCharacter2 = g_Renderer->CreatePngTexture("Textures/texture1.png");
+	particle_texCharacter = g_Renderer->CreatePngTexture("Textures/particle.png");
 }

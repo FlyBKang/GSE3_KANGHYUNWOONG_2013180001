@@ -7,9 +7,12 @@ using namespace std;
 
 class SceneMgr
 {
+	Renderer *g_Renderer;
 	GLuint Building_texCharacter1;
 	GLuint Building_texCharacter2;
-	Renderer *g_Renderer;
+	GLuint Background_texCharacter;
+	GLuint char_texCharacter;
+	GLuint particle_texCharacter;
 	bool check[MAX];
 	Object obj[MAX];
 public:

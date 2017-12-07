@@ -30,6 +30,7 @@ void RenderScene(void)
 	scene->TextureMaping();
 	if (cnt == 0)
 	{
+		cnt++;
 		scene->SceneSet(cnt, T1B1, OBJECT_BUILDING,1,LEVEL_GROUND);
 		cnt++;
 		scene->SceneSet(cnt, T1B2, OBJECT_BUILDING,1, LEVEL_GROUND);
