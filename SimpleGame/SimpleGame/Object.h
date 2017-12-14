@@ -22,9 +22,9 @@ class Object
 	float Object_gage;
 	int animationX = 0;
 	int animationY = 0;
-	float PartcleTime = 0.0f;
 
 public:
+	float PartcleTime = 0.0f;
 	Object();
 	Object(float x, float y, float z, float size, float r, float g, float b, float a,float vx, float vy,  int l, int lt, int  mod,int t, float le);
 	~Object();

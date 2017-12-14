@@ -120,7 +120,7 @@ void timeGetTime(int value) //10ms당 1번 켜짐 -> 0.5초는 500ms 50번
 	}
 	if (checkbullet > TIMER_BULLET)
 	{
-		scene->ShotBullet(cnt);
+		cnt = scene->ShotBullet(cnt);
 		checkbullet = 0;
 	}
 	RenderScene();

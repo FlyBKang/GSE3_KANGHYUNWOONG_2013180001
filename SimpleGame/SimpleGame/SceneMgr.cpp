@@ -82,7 +82,6 @@ int SceneMgr::Moding(int n)
 void SceneMgr::Rendering(int n)
 {
 	g_Renderer->DrawTexturedRect(0, 0, 0, 800, 1, 1, 1, 1, Background_texCharacter, 0.99);
-
 	g_Renderer->DrawTextW(-40.0f,0, GLUT_BITMAP_HELVETICA_18,1,1,1,"Insert Coin");
 	if (n >= MAX)
 		n = MAX;
@@ -91,6 +90,11 @@ void SceneMgr::Rendering(int n)
 		obj[i].Update(10.0);
 		obj[i].Draw(g_Renderer);
 	}
+	g_Renderer->DrawParticleClimate(Horizontal/2, Vertical/2, 0, 0.8, 1, 1, 1, 1, -0.1, -0.1, particle_texCharacter, time, 0.01);
+	g_Renderer->DrawParticleClimate(-Horizontal/2, Vertical/2, 0, 0.8, 1, 1, 1, 1, -0.1, -0.1, particle_texCharacter, time, 0.01);
+	g_Renderer->DrawParticleClimate(Horizontal / 2, -Vertical/2, 0, 0.8, 1, 1, 1, 1, -0.1, -0.1, particle_texCharacter, time, 0.01);
+	g_Renderer->DrawParticleClimate(-Horizontal / 2, -Vertical/2, 0, 0.8, 1, 1, 1, 1, -0.1, -0.1, particle_texCharacter, time, 0.01);
+	time += TIME*0.001;
 }
 void SceneMgr::SceneSet(int n, float x, float y, float z, float size, float r, float g, float b, float a, float vx, float vy, int l, int lt, int  mod,int t,float le) 
 {

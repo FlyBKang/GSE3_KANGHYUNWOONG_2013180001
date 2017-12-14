@@ -19,6 +19,7 @@ Object::Object(float x, float y, float z, float size, float r, float g, float b,
 	Object_team = t;
 	Object_level = le;
 	Object_gage = 1.0;
+	PartcleTime = 1;
 }
 void Object::Draw(Renderer * g_Renderer)
 {
@@ -28,15 +29,15 @@ void Object::Draw(Renderer * g_Renderer)
 		{
 			if (Object_team == 1)
 			{
-				g_Renderer->DrawParticle(Object_x, Object_y, Object_z, Object_size/2, 0.0f, 0.0f, 1.0f, Object_a, -Object_vx, -Object_vy, Object_Texture, PartcleTime);
 				g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size, 0.0f, 0.0f, 1.0f, Object_a, Object_level);
+				g_Renderer->DrawParticle(Object_x, Object_y, Object_z, Object_size / 2, 0.5f, 0.5f, 1.0f, Object_a, -Object_vx, -Object_vy, Object_Texture, PartcleTime, 0.15f);
 			}
 			else
 			{
-				g_Renderer->DrawParticle(Object_x, Object_y, Object_z, Object_size/2,  1.0f, 0.0f, 0.0f, Object_a, -Object_vx, -Object_vy, Object_Texture, PartcleTime);
 				g_Renderer->DrawSolidRect(Object_x, Object_y, Object_z, Object_size, 1.0f, 0.0f, 0.0f, Object_a, Object_level);
+				g_Renderer->DrawParticle(Object_x, Object_y, Object_z, Object_size/2,  1.0f, 0.5f, 0.5f, Object_a, -Object_vx, -Object_vy, Object_Texture, PartcleTime,0.15f);
 			}
-			PartcleTime +=1.0f;
+			PartcleTime +=TIME*0.001;
 		}
 		if (Object_mod == 1) //Fire m_texCharacter
 		{

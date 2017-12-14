@@ -17,6 +17,7 @@ class SceneMgr
 	GLuint particle_texCharacter;
 	bool check[MAX];
 	Object obj[MAX];
+	float time = 0.0f;
 public:
 	SceneMgr();
 	~SceneMgr();
